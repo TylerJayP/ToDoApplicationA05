@@ -100,22 +100,48 @@ namespace ToDoApplication
         //Main ListBox That Will Get Changed
         public void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            addingToListBox();
+
         }
 
         public void richTextBox2_TextChanged(object sender, EventArgs e)
         {
             
         }
-        public void addingToListBox()
-        {
-            listBox1.Items.Add(data);
-        }
-
         //Remove Task
         private void button4_Click(object sender, EventArgs e)
         {
-            listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            //Removing selected item(s) from Current Tasks
+            ListBox.SelectedObjectCollection currentItems = new ListBox.SelectedObjectCollection(listBox2);
+            currentItems = listBox2.SelectedItems;
+            if (listBox2.SelectedIndex != -1)
+            {
+                for (int i = currentItems.Count - 1; i >= 0; i--)
+                {
+                    listBox2.Items.Remove(currentItems[i]);
+                }
+            }
+
+            //Removing selected item(s) from Previous Tasks
+            ListBox.SelectedObjectCollection previousItems = new ListBox.SelectedObjectCollection(listBox3);
+            previousItems = listBox3.SelectedItems;
+            if (listBox3.SelectedIndex != -1)
+            {
+                for (int h = previousItems.Count - 1; h >= 0; h--)
+                {
+                    listBox3.Items.Remove(previousItems[h]);
+                }
+            }
+
+            //Removing selected item(s) from Upcoming Tasks
+            ListBox.SelectedObjectCollection upcomingItems = new ListBox.SelectedObjectCollection(listBox4);
+            upcomingItems = listBox4.SelectedItems;
+            if (listBox4.SelectedIndex != -1)
+            {
+                for (int j = upcomingItems.Count - 1; j >= 0; j--)
+                {
+                    listBox4.Items.Remove(upcomingItems[j]);
+                }
+            }
         }
 
         //Current Tasks ListBox
