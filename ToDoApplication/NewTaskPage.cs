@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace ToDoApplication
 {
-    public partial class Form2 : Form
+    public partial class NewTaskPage : Form
     {
-        Form1 infoForm1 = new();
-        public Form2()
+        Homepage infoForm1 = new();
+        public NewTaskPage()
         {
             InitializeComponent();
             this.Text = "New ToDo";

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace ToDoApplication
 {
-    public partial class Form1 : Form
+    public partial class Homepage : Form
     {
         List<string> data = new List<string>();
         
-        public Form1()
+        public Homepage()
         {
             InitializeComponent();
             this.Text = "ToDo Application";
@@ -44,7 +44,7 @@ namespace ToDoApplication
         //New Task
         public void button2_Click(object sender, EventArgs e)
         {
-            var newTaskForm = new Form2();
+            var newTaskForm = new NewTaskPage();
             newTaskForm.Show();
         }
 
@@ -112,11 +112,6 @@ namespace ToDoApplication
             listBox1.Items.Add(data);
         }
 
-        //Remove Task
-        private void button4_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.RemoveAt(listBox1.SelectedIndex);
-        }
 
         //Current Tasks ListBox
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,6 +128,11 @@ namespace ToDoApplication
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void RemoveTask_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.RemoveAt(listBox1.SelectedIndex);
         }
     }
 }
