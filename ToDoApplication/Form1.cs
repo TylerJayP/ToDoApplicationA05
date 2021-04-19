@@ -63,6 +63,7 @@ namespace ToDoApplication
                 listBox3.Visible = false;
                 listBox4.Visible = false;
                 listBox2.Visible = true;
+                listBox2.Items.Clear();
                 listBox2.Items.Add("This the the Current Tasks");
             }
             //ListBox3 is the control of this one (Previous Tasks)
@@ -72,6 +73,7 @@ namespace ToDoApplication
                 listBox2.Visible = false;
                 listBox4.Visible = false;
                 listBox3.Visible = true;
+                listBox3.Items.Clear();
                 listBox3.Items.Add("This the the Previous Tasks");
             }
             //ListBox4 is the control of this one (Upcoming Tasks)
@@ -81,6 +83,7 @@ namespace ToDoApplication
                 listBox2.Visible = false;
                 listBox3.Visible = false;
                 listBox4.Visible = true;
+                listBox4.Items.Clear();
                 listBox4.Items.Add("This the the Upcoming Tasks");
             }
         }
