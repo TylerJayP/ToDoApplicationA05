@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,10 @@ namespace ToDoApplication
 {
     public partial class Form1 : Form
     {
-        List<string> data = new List<string>();
-        
+        List<string> completedTasks = new List<string>();
+        List<string> currentTasks = new List<string>();
+        List<string> upcomingTasks = new List<string>();
+
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +25,9 @@ namespace ToDoApplication
 
         public void Form1_Load(object sender, EventArgs e)
         {
-
+            PopulateList(upcomingTasks, "UpcomingTasks.txt");
+            PopulateList(currentTasks, "CurrentTasks.txt");
+            PopulateList(completedTasks, "CompletedTasks.txt");
         }
 
         public void label1_Click(object sender, EventArgs e)
@@ -64,7 +69,7 @@ namespace ToDoApplication
                 listBox4.Visible = false;
                 listBox2.Visible = true;
                 listBox2.Items.Clear();
-                listBox2.Items.Add("This the the Current Tasks");
+                listBox2.Items.AddRange(currentTasks.ToArray());
             }
             //ListBox3 is the control of this one (Previous Tasks)
             if(selectedIndex == 1)
@@ -74,7 +79,7 @@ namespace ToDoApplication
                 listBox4.Visible = false;
                 listBox3.Visible = true;
                 listBox3.Items.Clear();
-                listBox3.Items.Add("This the the Previous Tasks");
+                listBox3.Items.AddRange(completedTasks.ToArray());
             }
             //ListBox4 is the control of this one (Upcoming Tasks)
             if(selectedIndex == 2)
@@ -84,7 +89,7 @@ namespace ToDoApplication
                 listBox3.Visible = false;
                 listBox4.Visible = true;
                 listBox4.Items.Clear();
-                listBox4.Items.Add("This the the Upcoming Tasks");
+                listBox4.Items.AddRange(upcomingTasks.ToArray());
             }
         }
 
@@ -150,18 +155,32 @@ namespace ToDoApplication
         //Current Tasks ListBox
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            richTextBox2.Text = listBox2.SelectedItem.ToString();
         }
 
         //Previous Tasks ListBox
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            richTextBox2.Text = listBox3.SelectedItem.ToString();
         }
         //Upcoming Tasks ListBox
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
+            richTextBox2.Text = listBox4.SelectedItem.ToString();
+        }
 
+        private void PopulateList(List<string> taskList, string folder)
+        {
+            string line;
+
+            using (StreamReader reader = new StreamReader(folder))
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    taskList.Add(line);
+                }
+                reader.Close();
+            }
         }
     }
 }
