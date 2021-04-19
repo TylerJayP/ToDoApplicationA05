@@ -16,7 +16,7 @@ namespace ToDoApplication
         public Form2()
         {
             InitializeComponent();
-            this.Text = "New ToDo";
+            this.Text = "New Task";
         }
         public void label1_Click(object sender, EventArgs e)
         {

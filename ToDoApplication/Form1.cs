@@ -91,8 +91,8 @@ namespace ToDoApplication
         //Edit Button
         public void button3_Click(object sender, EventArgs e)
         {
-
-            
+            var updateTaskForm = new Form3();
+            updateTaskForm.Show();
         }
 
         public void richTextBox1_TextChanged(object sender, EventArgs e)
