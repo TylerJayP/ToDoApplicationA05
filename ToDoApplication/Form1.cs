@@ -121,11 +121,12 @@ namespace ToDoApplication
             //Removing selected item(s) from Current Tasks
             ListBox.SelectedObjectCollection currentItems = new ListBox.SelectedObjectCollection(listBox2);
             currentItems = listBox2.SelectedItems;
+            
             if (listBox2.SelectedIndex != -1)
             {
                 for (int i = currentItems.Count - 1; i >= 0; i--)
                 {
-                    listBox2.Items.Remove(currentItems[i]);
+                    listBox2.Items.Remove(currentItems[i]);                   
                 }
             }
 
@@ -155,18 +156,41 @@ namespace ToDoApplication
         //Current Tasks ListBox
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            richTextBox2.Text = listBox2.SelectedItem.ToString();
+            
+            if(listBox2.SelectedItem == null)
+            {
+                richTextBox2.Text = "Removed!";
+            }
+            else
+            {
+                richTextBox2.Text = listBox2.SelectedItem.ToString();
+            }
+            
         }
 
         //Previous Tasks ListBox
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            richTextBox2.Text = listBox3.SelectedItem.ToString();
+            if (listBox3.SelectedItem == null)
+            {
+                richTextBox2.Text = "Removed!";
+            }
+            else
+            {
+                richTextBox2.Text = listBox3.SelectedItem.ToString();
+            }
         }
         //Upcoming Tasks ListBox
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            richTextBox2.Text = listBox4.SelectedItem.ToString();
+            if (listBox4.SelectedItem == null)
+            {
+                richTextBox2.Text = "Removed!";
+            }
+            else
+            {
+                richTextBox2.Text = listBox4.SelectedItem.ToString();
+            }
         }
 
         private void PopulateList(List<string> taskList, string folder)
