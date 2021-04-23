@@ -35,7 +35,7 @@ namespace ToDoApplication
             this.CompleteTask = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.InfoBox = new System.Windows.Forms.RichTextBox();
             this.RemoveTask = new System.Windows.Forms.Button();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
@@ -121,17 +121,17 @@ namespace ToDoApplication
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // richTextBox2
+            // InfoBox
             // 
-            this.richTextBox2.BackColor = System.Drawing.Color.Black;
-            this.richTextBox2.ForeColor = System.Drawing.Color.White;
-            this.richTextBox2.Location = new System.Drawing.Point(250, 330);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(407, 180);
-            this.richTextBox2.TabIndex = 7;
-            this.richTextBox2.Text = "TASK INFO WILL APPEAR HERE";
-            this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
+            this.InfoBox.BackColor = System.Drawing.Color.Black;
+            this.InfoBox.ForeColor = System.Drawing.Color.White;
+            this.InfoBox.Location = new System.Drawing.Point(250, 330);
+            this.InfoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.InfoBox.Name = "InfoBox";
+            this.InfoBox.Size = new System.Drawing.Size(407, 180);
+            this.InfoBox.TabIndex = 7;
+            this.InfoBox.Text = "TASK INFO WILL APPEAR HERE";
+            this.InfoBox.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
             // 
             // RemoveTask
             // 
@@ -169,7 +169,7 @@ namespace ToDoApplication
             this.ClientSize = new System.Drawing.Size(887, 662);
             this.Controls.Add(this.listBox4);
             this.Controls.Add(this.RemoveTask);
-            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.InfoBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.CompleteTask);
@@ -193,7 +193,7 @@ namespace ToDoApplication
         private System.Windows.Forms.Button CompleteTask;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox InfoBox;
         private System.Windows.Forms.Button RemoveTask;
         private System.Windows.Forms.ListBox listBox4;
     }

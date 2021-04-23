@@ -33,17 +33,19 @@ namespace ToDoApplication
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.TaskInfo = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.addNewTask = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.taskName = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.HighButton = new System.Windows.Forms.RadioButton();
+            this.MediumButton = new System.Windows.Forms.RadioButton();
+            this.LowButton = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -87,79 +89,15 @@ namespace ToDoApplication
             this.label3.Text = "Priority";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // radioButton1
+            // TaskInfo
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(196, 168);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(17, 16);
-            this.radioButton1.TabIndex = 4;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(275, 168);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(17, 16);
-            this.radioButton2.TabIndex = 5;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(349, 168);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(17, 16);
-            this.radioButton3.TabIndex = 6;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(339, 188);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 19);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "High";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(179, 188);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 19);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Low";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(251, 188);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 19);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Medium";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(177, 225);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(229, 88);
-            this.richTextBox1.TabIndex = 12;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.TaskInfo.Location = new System.Drawing.Point(177, 225);
+            this.TaskInfo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TaskInfo.Name = "TaskInfo";
+            this.TaskInfo.Size = new System.Drawing.Size(229, 88);
+            this.TaskInfo.TabIndex = 12;
+            this.TaskInfo.Text = "";
+            this.TaskInfo.TextChanged += new System.EventHandler(this.TaskInfo_TextChanged);
             // 
             // label7
             // 
@@ -181,7 +119,7 @@ namespace ToDoApplication
             this.addNewTask.TabIndex = 14;
             this.addNewTask.Text = "Add New Task";
             this.addNewTask.UseVisualStyleBackColor = false;
-            this.addNewTask.Click += new System.EventHandler(this.button1_Click);
+            this.addNewTask.Click += new System.EventHandler(this.AddNewTask_Click);
             // 
             // label8
             // 
@@ -202,29 +140,105 @@ namespace ToDoApplication
             this.taskName.TabIndex = 16;
             this.taskName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // Form2
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.HighButton);
+            this.groupBox1.Controls.Add(this.MediumButton);
+            this.groupBox1.Controls.Add(this.LowButton);
+            this.groupBox1.Location = new System.Drawing.Point(177, 153);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(230, 56);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(85, 31);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 19);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Medium";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(24, 31);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 19);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Low";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(167, 31);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 19);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "High";
+            // 
+            // HighButton
+            // 
+            this.HighButton.AutoSize = true;
+            this.HighButton.Location = new System.Drawing.Point(177, 11);
+            this.HighButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HighButton.Name = "HighButton";
+            this.HighButton.Size = new System.Drawing.Size(17, 16);
+            this.HighButton.TabIndex = 14;
+            this.HighButton.TabStop = true;
+            this.HighButton.UseVisualStyleBackColor = true;
+            // 
+            // MediumButton
+            // 
+            this.MediumButton.AutoSize = true;
+            this.MediumButton.Location = new System.Drawing.Point(105, 11);
+            this.MediumButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MediumButton.Name = "MediumButton";
+            this.MediumButton.Size = new System.Drawing.Size(17, 16);
+            this.MediumButton.TabIndex = 13;
+            this.MediumButton.TabStop = true;
+            this.MediumButton.UseVisualStyleBackColor = true;
+            // 
+            // LowButton
+            // 
+            this.LowButton.AutoSize = true;
+            this.LowButton.Location = new System.Drawing.Point(32, 11);
+            this.LowButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.LowButton.Name = "LowButton";
+            this.LowButton.Size = new System.Drawing.Size(17, 16);
+            this.LowButton.TabIndex = 12;
+            this.LowButton.TabStop = true;
+            this.LowButton.UseVisualStyleBackColor = true;
+            // 
+            // NewTaskPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(512, 391);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.taskName);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.addNewTask);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.TaskInfo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "Form2";
+            this.Name = "NewTaskPage";
             this.Text = "Medium";
+            this.Load += new System.EventHandler(this.NewTaskPage_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,16 +250,19 @@ namespace ToDoApplication
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox TaskInfo;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button addNewTask;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox taskName;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton HighButton;
+        private System.Windows.Forms.RadioButton MediumButton;
+        private System.Windows.Forms.RadioButton LowButton;
     }
 }

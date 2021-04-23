@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDoApplication
 {
-    enum Priority
+    public enum Priority
     {
         LOW, MEDIUM, HIGH
     }
