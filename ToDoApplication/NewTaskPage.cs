@@ -89,7 +89,6 @@ namespace ToDoApplication
         public void textBox1_TextChanged(object sender, EventArgs e)
         {
 
-
         }
 
         private void NewTaskPage_Load(object sender, EventArgs e)

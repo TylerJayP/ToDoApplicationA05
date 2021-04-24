@@ -14,16 +14,16 @@ namespace ToDoApplication
    
     public partial class Homepage : Form
     {
-        IList<Task> previousTasks { get; set; }
-        IList<Task> currentTasks { get; set; }
-        IList<Task> upcomingTasks { get; set; }
-        
+        // changed Lists to be public
+        public static IList<Task> previousTasks { get; set; }
+        public static IList<Task> currentTasks { get; set; }
+        public static IList<Task> upcomingTasks { get; set; }
 
         public Homepage()
         {
-            this.previousTasks = new List<Task>();
-            this.currentTasks = new List<Task>();
-            this.upcomingTasks = new List<Task>();
+            previousTasks = new List<Task>();
+            currentTasks = new List<Task>();
+            upcomingTasks = new List<Task>();
 
             InitializeComponent();
             this.Text = "ToDo Application";
@@ -31,12 +31,12 @@ namespace ToDoApplication
 
         public void AddUpcomingTask(Task task)
         {
-            this.upcomingTasks.Add(task);
+            upcomingTasks.Add(task);
         }
         
         public void AddCurrentTask(Task task)
         {
-            this.currentTasks.Add(task);
+            currentTasks.Add(task);
         }
 
         public void Form1_Load(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace ToDoApplication
 
         public void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         //Complete Task
@@ -75,7 +75,6 @@ namespace ToDoApplication
             int selectedIndex = comboBox1.SelectedIndex;
             Object selectedItem = comboBox1.SelectedItem;
 
-
             //Index Sheet: 0 = Current || 1 = Previous || 2 = Upcoming
             //ListBox2 is the control for this one (Current Tasks)
             if (selectedIndex == 0)
@@ -85,7 +84,7 @@ namespace ToDoApplication
                 List<string> taskNames = new List<string>();
                 foreach (Task t in currentTasks)
                 {
-                    taskNames.Add(t.Name);
+                    taskNames.Add(t.Name);                 
                 }
                 listBox4.Items.AddRange(taskNames.ToArray());
             }
@@ -112,10 +111,11 @@ namespace ToDoApplication
         }
 
         //Edit Button
+        //Changing the form parameters allows for passing of form controls along with their methods
         public void button3_Click(object sender, EventArgs e)
         {
-            /*var updateTaskForm = new Form3();
-            updateTaskForm.Show();*/
+            var updateTaskForm = new EditTaskPage(comboBox1.SelectedIndex, listBox4.SelectedIndex);
+            updateTaskForm.Show();
         }
 
         public void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -232,7 +232,6 @@ namespace ToDoApplication
                 InfoBox.Text = s.ToString();
             }
         }
-
 
         private void PopulateList(IList<Task> taskList, string folder)
         {

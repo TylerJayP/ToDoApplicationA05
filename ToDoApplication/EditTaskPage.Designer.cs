@@ -1,7 +1,7 @@
 ﻿
 namespace ToDoApplication
 {
-    partial class Form3
+    partial class EditTaskPage
     {
         /// <summary>
         /// Required designer variable.
@@ -34,16 +34,16 @@ namespace ToDoApplication
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.taskName = new System.Windows.Forms.TextBox();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.lowPriority = new System.Windows.Forms.RadioButton();
+            this.mediumPriority = new System.Windows.Forms.RadioButton();
+            this.highPriority = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -95,56 +95,55 @@ namespace ToDoApplication
             this.label5.TabIndex = 4;
             this.label5.Text = "Task";
             // 
-            // textBox1
+            // taskName
             // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(129, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(201, 23);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.taskName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.taskName.Location = new System.Drawing.Point(129, 45);
+            this.taskName.Name = "taskName";
+            this.taskName.Size = new System.Drawing.Size(201, 23);
+            this.taskName.TabIndex = 5;
             // 
-            // dateTimePicker1
+            // dateTimePicker
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dateTimePicker1.Location = new System.Drawing.Point(130, 85);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
-            this.dateTimePicker1.TabIndex = 6;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateTimePicker.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dateTimePicker.Location = new System.Drawing.Point(130, 85);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePicker.TabIndex = 6;
+            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // radioButton1
+            // lowPriority
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(136, 124);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(14, 13);
-            this.radioButton1.TabIndex = 7;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.lowPriority.AutoSize = true;
+            this.lowPriority.Location = new System.Drawing.Point(136, 124);
+            this.lowPriority.Name = "lowPriority";
+            this.lowPriority.Size = new System.Drawing.Size(14, 13);
+            this.lowPriority.TabIndex = 7;
+            this.lowPriority.TabStop = true;
+            this.lowPriority.UseVisualStyleBackColor = true;
+            this.lowPriority.CheckedChanged += new System.EventHandler(this.lowPriority_CheckedChanged);
             // 
-            // radioButton2
+            // mediumPriority
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(185, 124);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(14, 13);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.mediumPriority.AutoSize = true;
+            this.mediumPriority.Location = new System.Drawing.Point(185, 124);
+            this.mediumPriority.Name = "mediumPriority";
+            this.mediumPriority.Size = new System.Drawing.Size(14, 13);
+            this.mediumPriority.TabIndex = 8;
+            this.mediumPriority.TabStop = true;
+            this.mediumPriority.UseVisualStyleBackColor = true;
+            this.mediumPriority.CheckedChanged += new System.EventHandler(this.mediumPriority_CheckedChanged);
             // 
-            // radioButton3
+            // highPriority
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(231, 124);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(14, 13);
-            this.radioButton3.TabIndex = 9;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            this.highPriority.AutoSize = true;
+            this.highPriority.Location = new System.Drawing.Point(231, 124);
+            this.highPriority.Name = "highPriority";
+            this.highPriority.Size = new System.Drawing.Size(14, 13);
+            this.highPriority.TabIndex = 9;
+            this.highPriority.TabStop = true;
+            this.highPriority.UseVisualStyleBackColor = true;
+            this.highPriority.CheckedChanged += new System.EventHandler(this.highPriority_CheckedChanged);
             // 
             // label6
             // 
@@ -186,40 +185,40 @@ namespace ToDoApplication
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
-            // button1
+            // updateButton
             // 
-            this.button1.BackColor = System.Drawing.Color.Lime;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(113, 251);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 28);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Update Task";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.updateButton.BackColor = System.Drawing.Color.Lime;
+            this.updateButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.updateButton.Location = new System.Drawing.Point(113, 251);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(134, 28);
+            this.updateButton.TabIndex = 14;
+            this.updateButton.Text = "Update Task";
+            this.updateButton.UseVisualStyleBackColor = false;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
-            // Form3
+            // EditTaskPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 291);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.updateButton);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.highPriority);
+            this.Controls.Add(this.mediumPriority);
+            this.Controls.Add(this.lowPriority);
+            this.Controls.Add(this.dateTimePicker);
+            this.Controls.Add(this.taskName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Name = "Form3";
+            this.Name = "EditTaskPage";
             this.Text = "Low";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -233,15 +232,15 @@ namespace ToDoApplication
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.TextBox taskName;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.RadioButton lowPriority;
+        private System.Windows.Forms.RadioButton mediumPriority;
+        private System.Windows.Forms.RadioButton highPriority;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button updateButton;
     }
 }
