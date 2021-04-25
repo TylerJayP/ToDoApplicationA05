@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ToDoApplication
 {
-   
+
     public partial class Homepage : Form
     {
         // changed Lists to be public
@@ -33,7 +30,7 @@ namespace ToDoApplication
         {
             upcomingTasks.Add(task);
         }
-        
+
         public void AddCurrentTask(Task task)
         {
             currentTasks.Add(task);
@@ -53,7 +50,7 @@ namespace ToDoApplication
 
         public void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         //Complete Task
@@ -84,7 +81,7 @@ namespace ToDoApplication
                 List<string> taskNames = new List<string>();
                 foreach (Task t in currentTasks)
                 {
-                    taskNames.Add(t.Name);                 
+                    taskNames.Add(t.Name);
                 }
                 listBox4.Items.AddRange(taskNames.ToArray());
             }

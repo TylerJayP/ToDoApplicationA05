@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ToDoApplication
 {
@@ -21,11 +17,11 @@ namespace ToDoApplication
             this.info = info;
         }
 
-        
-        public override string ToString() 
+
+        public override string ToString()
         {
             return String.Format("{0} {1}: {2}\n {3}", this.Name, this.p, this.dt, this.info);
         }
-        
+
     }
 }
