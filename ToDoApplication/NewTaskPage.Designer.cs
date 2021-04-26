@@ -268,8 +268,6 @@ namespace ToDoApplication
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RichTextBox TaskInfo;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button addNewTask;
