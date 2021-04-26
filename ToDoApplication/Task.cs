@@ -20,7 +20,7 @@ namespace ToDoApplication
 
         public override string ToString()
         {
-            return String.Format("{0} {1}: {2}\n {3}", this.Name, this.p, this.dt, this.info);
+            return String.Format("Name: {0}\nDate: {1}\nInfo: {2}\n", this.Name, this.dt, this.info);
         }
 
     }

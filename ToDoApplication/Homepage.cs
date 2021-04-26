@@ -21,7 +21,6 @@ namespace ToDoApplication
             previousTasks = new List<Task>();
             currentTasks = new List<Task>();
             upcomingTasks = new List<Task>();
-
             InitializeComponent();
             this.Text = "ToDo Application";
         }
@@ -44,16 +43,6 @@ namespace ToDoApplication
             PopulateList(upcomingTasks, "UpcomingTasks.txt");
             PopulateList(currentTasks, "CurrentTasks.txt");
             PopulateList(previousTasks, "CompletedTasks.txt");
-        }
-
-        public void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         //Complete Task
@@ -165,7 +154,6 @@ namespace ToDoApplication
                 //Allow complete task button
                 CompleteTask.Enabled = true;
 
-                listBox4.Visible = true;
                 listBox4.Items.Clear();
                 List<string> names = new List<string>();
                 foreach (Task t in currentTasks)
@@ -180,7 +168,6 @@ namespace ToDoApplication
                 //Disallow complete task button
                 CompleteTask.Enabled = false;
 
-                listBox4.Visible = true;
                 listBox4.Items.Clear();
                 List<string> names = new List<string>();
                 foreach (Task t in previousTasks)
@@ -196,7 +183,6 @@ namespace ToDoApplication
                 //Allow complete task button
                 CompleteTask.Enabled = true;
 
-                listBox4.Visible = true;
                 listBox4.Items.Clear();
                 List<string> names = new List<string>();
                 foreach (Task t in upcomingTasks)
@@ -400,6 +386,11 @@ namespace ToDoApplication
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
             TimeLabel.Text = DateTime.Now.ToLongTimeString();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

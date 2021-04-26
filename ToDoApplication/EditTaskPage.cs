@@ -20,9 +20,9 @@ namespace ToDoApplication
             // Had to make the task lists public static in order to get the data from different forms for easier data processing
             if (cbIndex == 0 && Homepage.currentTasks.Any())
             {
-                taskName.Text = Homepage.currentTasks[lbIndex].Name;
-                richTextBox1.Text = Homepage.currentTasks[lbIndex].info;
-                dateTimePicker.Value = Homepage.currentTasks[lbIndex].dt;
+                EditNameBox.Text = Homepage.currentTasks[lbIndex].Name;
+                EditInfoBox.Text = Homepage.currentTasks[lbIndex].info;
+                EditDateBox.Value = Homepage.currentTasks[lbIndex].dt;
 
                 if (Homepage.currentTasks[lbIndex].p == Priority.LOW)
                 {
@@ -38,9 +38,9 @@ namespace ToDoApplication
 
             if (cbIndex == 1 && Homepage.previousTasks.Any())
             {
-                taskName.Text = Homepage.previousTasks[lbIndex].Name;
-                richTextBox1.Text = Homepage.previousTasks[lbIndex].info;
-                dateTimePicker.Value = Homepage.previousTasks[lbIndex].dt;
+                EditNameBox.Text = Homepage.previousTasks[lbIndex].Name;
+                EditInfoBox.Text = Homepage.previousTasks[lbIndex].info;
+                EditDateBox.Value = Homepage.previousTasks[lbIndex].dt;
 
                 if (Homepage.previousTasks[lbIndex].p == Priority.LOW)
                 {
@@ -56,9 +56,9 @@ namespace ToDoApplication
 
             if (cbIndex == 2 && Homepage.upcomingTasks.Any())
             {
-                taskName.Text = Homepage.upcomingTasks[lbIndex].Name;
-                richTextBox1.Text = Homepage.upcomingTasks[lbIndex].info;
-                dateTimePicker.Value = Homepage.upcomingTasks[lbIndex].dt;
+                EditNameBox.Text = Homepage.upcomingTasks[lbIndex].Name;
+                EditInfoBox.Text = Homepage.upcomingTasks[lbIndex].info;
+                EditDateBox.Value = Homepage.upcomingTasks[lbIndex].dt;
 
                 if (Homepage.upcomingTasks[lbIndex].p == Priority.LOW)
                 {
@@ -75,17 +75,17 @@ namespace ToDoApplication
 
         public void updateButton_Click(object sender, EventArgs e)
         {
-            DateTime dt = dateTimePicker.Value;
-            string name = taskName.Text;
-            string info = richTextBox1.Text;
+            DateTime dt = EditDateBox.Value;
+            string name = EditNameBox.Text;
+            string info = EditInfoBox.Text;
             Priority p;
 
             //Pretty much the reverse of logic above in the EditTaskPage method
             if (cbIndex == 0)
             {               
-                Homepage.currentTasks[lbIndex].Name = taskName.Text;
-                Homepage.currentTasks[lbIndex].info = richTextBox1.Text;
-                Homepage.currentTasks[lbIndex].dt = dateTimePicker.Value;
+                Homepage.currentTasks[lbIndex].Name = EditNameBox.Text;
+                Homepage.currentTasks[lbIndex].info = EditInfoBox.Text;
+                Homepage.currentTasks[lbIndex].dt = EditDateBox.Value;
 
                 if (lowPriority.Checked == true)
                 {
@@ -107,9 +107,9 @@ namespace ToDoApplication
 
             if (cbIndex == 1)
             {
-                Homepage.previousTasks[lbIndex].Name = taskName.Text;
-                Homepage.previousTasks[lbIndex].info = richTextBox1.Text;
-                Homepage.previousTasks[lbIndex].dt = dateTimePicker.Value;
+                Homepage.previousTasks[lbIndex].Name = EditNameBox.Text;
+                Homepage.previousTasks[lbIndex].info = EditInfoBox.Text;
+                Homepage.previousTasks[lbIndex].dt = EditDateBox.Value;
 
                 if (lowPriority.Checked == true)
                 {
@@ -131,9 +131,9 @@ namespace ToDoApplication
             if (cbIndex == 2)
             {
 
-                Homepage.upcomingTasks[lbIndex].Name = taskName.Text;
-                Homepage.upcomingTasks[lbIndex].info = richTextBox1.Text;
-                Homepage.upcomingTasks[lbIndex].dt = dateTimePicker.Value;
+                Homepage.upcomingTasks[lbIndex].Name = EditNameBox.Text;
+                Homepage.upcomingTasks[lbIndex].info = EditInfoBox.Text;
+                Homepage.upcomingTasks[lbIndex].dt = EditDateBox.Value;
 
                 if (lowPriority.Checked == true)
                 {
