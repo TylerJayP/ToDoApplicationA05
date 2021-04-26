@@ -73,7 +73,7 @@ namespace ToDoApplication
                     {
                         InfoBox.Text = "Removed!";
                     }
-                    else if (listBox4.SelectedItem != null && currentTasks.Count >= 1)
+                    else if (listBox4.SelectedItem != null && currentTasks.Any())
                     {
                         string selectedItem = listBox4.SelectedItem.ToString();
                         int selectedIndex = listBox4.SelectedIndex;
@@ -83,22 +83,26 @@ namespace ToDoApplication
                             select c;
                         foreach (Task tk in cTask)
                         {
-                            previousTasks.Add(tk);
-                            currentTasks.Remove(tk);
+                            if (currentTasks.Any())
+                            {
+                                previousTasks.Add(tk);
+                                currentTasks.Remove(tk);
+                            }
+                            break;
                         }
                         StringBuilder s = new StringBuilder();
                         foreach (Task t in currentTasks)
                         {
                             s.Append(t.ToString() + "\n");
                         }
+
                         InfoBox.Text = s.ToString();
-                        currentTasks.RemoveAt(selectedIndex);
                     }
                     else
                     {
                         InfoBox.Clear();
                     }
-                    break; 
+                    break;
 
                 //Previous
                 case 1:
@@ -110,7 +114,7 @@ namespace ToDoApplication
                     {
                         InfoBox.Text = "Removed!";
                     }
-                    else if (listBox4.SelectedItem != null && currentTasks.Count >= 1)
+                    else if (listBox4.SelectedItem != null && upcomingTasks.Any())
                     {
                         string selectedItem = listBox4.SelectedItem.ToString();
                         int selectedIndex = listBox4.SelectedIndex;
@@ -120,16 +124,22 @@ namespace ToDoApplication
                             select u;
                         foreach (Task tk in uTask)
                         {
-                            previousTasks.Add(tk);
-                            currentTasks.Remove(tk);
+
+                            if (upcomingTasks.Any())
+                            {
+                                previousTasks.Add(tk);
+                                upcomingTasks.Remove(tk);
+                            }
+                            break;
                         }
+
                         StringBuilder s = new StringBuilder();
                         foreach (Task t in upcomingTasks)
                         {
                             s.Append(t.ToString() + "\n");
                         }
+
                         InfoBox.Text = s.ToString();
-                        previousTasks.RemoveAt(selectedIndex);
                     }
                     else
                     {
