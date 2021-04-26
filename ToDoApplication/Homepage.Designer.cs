@@ -1,7 +1,7 @@
 ﻿
 namespace ToDoApplication
 {
-    partial class Homepage
+     partial class Homepage
     {
         /// <summary>
         ///  Required designer variable.
@@ -164,7 +164,7 @@ namespace ToDoApplication
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.BackgroundImage = global::ToDoApplication.Properties.Resources.woodshop;
+            //this.BackgroundImage = global::ToDoApplication.Properties.Resources.woodshop;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(887, 662);
             this.Controls.Add(this.listBox4);
