@@ -54,7 +54,7 @@ namespace ToDoApplication
         public void AddNewTask_Click(object sender, EventArgs e)
         {
             string name = taskName.Text;
-            DateTime dt = dateTimePicker1.Value;
+            DateTime dt = dateTimePicker1.Value.Date;
             Priority p;
             if (LowButton.Checked == true)
                 p = Priority.LOW;
@@ -105,6 +105,11 @@ namespace ToDoApplication
             groupBox1.Controls.Add(MediumButton);
             groupBox1.Controls.Add(HighButton);
             Controls.Add(groupBox1);
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

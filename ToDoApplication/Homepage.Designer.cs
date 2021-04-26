@@ -48,7 +48,7 @@ namespace ToDoApplication
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(165)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.label1.Font = new System.Drawing.Font("Goudy Stout", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.ForeColor = System.Drawing.Color.Snow;
             this.label1.Location = new System.Drawing.Point(195, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(509, 51);
@@ -58,13 +58,14 @@ namespace ToDoApplication
             // 
             // comboBox1
             // 
+            this.comboBox1.BackColor = System.Drawing.Color.PapayaWhip;
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Current Tasks",
             "Previous Tasks",
             "Upcoming Tasks"});
-            this.comboBox1.Location = new System.Drawing.Point(355, 103);
+            this.comboBox1.Location = new System.Drawing.Point(355, 96);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(199, 36);
@@ -75,21 +76,22 @@ namespace ToDoApplication
             // CompleteTask
             // 
             this.CompleteTask.AccessibleName = "CompleteTask";
-            this.CompleteTask.BackColor = System.Drawing.Color.Lime;
+            this.CompleteTask.BackColor = System.Drawing.Color.Goldenrod;
             this.CompleteTask.FlatAppearance.BorderSize = 5;
+            this.CompleteTask.Font = new System.Drawing.Font("Segoe Print", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CompleteTask.ForeColor = System.Drawing.Color.Black;
-            this.CompleteTask.Location = new System.Drawing.Point(323, 534);
+            this.CompleteTask.Location = new System.Drawing.Point(328, 537);
             this.CompleteTask.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CompleteTask.Name = "CompleteTask";
             this.CompleteTask.Size = new System.Drawing.Size(246, 90);
             this.CompleteTask.TabIndex = 3;
-            this.CompleteTask.Text = "COMPLETE TASK";
+            this.CompleteTask.Text = "COMPLETED";
             this.CompleteTask.UseVisualStyleBackColor = false;
             this.CompleteTask.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button2.BackColor = System.Drawing.Color.OliveDrab;
             this.button2.Location = new System.Drawing.Point(318, 279);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
@@ -101,7 +103,7 @@ namespace ToDoApplication
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button3.BackColor = System.Drawing.Color.GreenYellow;
             this.button3.Location = new System.Drawing.Point(416, 279);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button3.Name = "button3";
@@ -113,8 +115,9 @@ namespace ToDoApplication
             // 
             // InfoBox
             // 
-            this.InfoBox.BackColor = System.Drawing.Color.Black;
-            this.InfoBox.ForeColor = System.Drawing.Color.White;
+            this.InfoBox.BackColor = System.Drawing.Color.Tan;
+            this.InfoBox.Font = new System.Drawing.Font("Segoe Print", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.InfoBox.ForeColor = System.Drawing.Color.Black;
             this.InfoBox.Location = new System.Drawing.Point(250, 330);
             this.InfoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.InfoBox.Name = "InfoBox";
@@ -126,7 +129,7 @@ namespace ToDoApplication
             // 
             // RemoveTask
             // 
-            this.RemoveTask.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.RemoveTask.BackColor = System.Drawing.Color.IndianRed;
             this.RemoveTask.Location = new System.Drawing.Point(506, 279);
             this.RemoveTask.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.RemoveTask.Name = "RemoveTask";
@@ -138,14 +141,15 @@ namespace ToDoApplication
             // 
             // listBox4
             // 
-            this.listBox4.BackColor = System.Drawing.Color.Black;
-            this.listBox4.ForeColor = System.Drawing.Color.White;
+            this.listBox4.BackColor = System.Drawing.Color.Tan;
+            this.listBox4.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listBox4.ForeColor = System.Drawing.Color.Black;
             this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 20;
+            this.listBox4.ItemHeight = 26;
             this.listBox4.Location = new System.Drawing.Point(319, 147);
             this.listBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(267, 124);
+            this.listBox4.Size = new System.Drawing.Size(267, 108);
             this.listBox4.TabIndex = 12;
             this.listBox4.Visible = false;
             this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
@@ -153,7 +157,9 @@ namespace ToDoApplication
             // DateLabel
             // 
             this.DateLabel.AutoSize = true;
+            this.DateLabel.BackColor = System.Drawing.Color.Transparent;
             this.DateLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DateLabel.ForeColor = System.Drawing.Color.Silver;
             this.DateLabel.Location = new System.Drawing.Point(12, 111);
             this.DateLabel.Name = "DateLabel";
             this.DateLabel.Size = new System.Drawing.Size(76, 31);
@@ -164,7 +170,9 @@ namespace ToDoApplication
             // TimeLabel
             // 
             this.TimeLabel.AutoSize = true;
-            this.TimeLabel.Location = new System.Drawing.Point(12, 147);
+            this.TimeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.TimeLabel.ForeColor = System.Drawing.Color.Silver;
+            this.TimeLabel.Location = new System.Drawing.Point(15, 147);
             this.TimeLabel.Name = "TimeLabel";
             this.TimeLabel.Size = new System.Drawing.Size(50, 20);
             this.TimeLabel.TabIndex = 14;

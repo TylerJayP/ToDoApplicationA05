@@ -12,7 +12,7 @@ namespace ToDoApplication
         public Task(string Name, DateTime dt, Priority p, string info)
         {
             this.Name = Name;
-            this.dt = dt;
+            this.dt = dt.Date;
             this.p = p;
             this.info = info;
         }

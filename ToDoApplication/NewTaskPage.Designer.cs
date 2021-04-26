@@ -51,47 +51,58 @@ namespace ToDoApplication
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Stencil", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(168, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 32);
+            this.label1.Size = new System.Drawing.Size(182, 40);
             this.label1.TabIndex = 0;
             this.label1.Text = "New Task";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(179, 115);
+            this.dateTimePicker1.CalendarMonthBackground = System.Drawing.Color.PapayaWhip;
+            this.dateTimePicker1.CalendarTitleBackColor = System.Drawing.Color.PapayaWhip;
+            this.dateTimePicker1.Font = new System.Drawing.Font("Ink Free", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dateTimePicker1.Location = new System.Drawing.Point(140, 115);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(228, 27);
+            this.dateTimePicker1.Size = new System.Drawing.Size(272, 29);
             this.dateTimePicker1.TabIndex = 1;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(32, 111);
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Segoe Print", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(36, 109);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 32);
+            this.label2.Size = new System.Drawing.Size(72, 40);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Task Date";
+            this.label2.Text = "Date";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(31, 157);
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Segoe Print", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(35, 166);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 32);
+            this.label3.Size = new System.Drawing.Size(109, 40);
             this.label3.TabIndex = 3;
             this.label3.Text = "Priority";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // TaskInfo
             // 
-            this.TaskInfo.Location = new System.Drawing.Point(177, 225);
+            this.TaskInfo.BackColor = System.Drawing.Color.PapayaWhip;
+            this.TaskInfo.Location = new System.Drawing.Point(140, 229);
             this.TaskInfo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TaskInfo.Name = "TaskInfo";
             this.TaskInfo.Size = new System.Drawing.Size(229, 88);
@@ -102,20 +113,22 @@ namespace ToDoApplication
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(32, 223);
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Segoe Print", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(37, 248);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 32);
+            this.label7.Size = new System.Drawing.Size(96, 40);
             this.label7.TabIndex = 13;
-            this.label7.Text = "Task";
+            this.label7.Text = "Details";
             // 
             // addNewTask
             // 
-            this.addNewTask.BackColor = System.Drawing.Color.Lime;
-            this.addNewTask.Location = new System.Drawing.Point(129, 335);
+            this.addNewTask.BackColor = System.Drawing.Color.Goldenrod;
+            this.addNewTask.Location = new System.Drawing.Point(172, 333);
             this.addNewTask.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addNewTask.Name = "addNewTask";
-            this.addNewTask.Size = new System.Drawing.Size(153, 37);
+            this.addNewTask.Size = new System.Drawing.Size(162, 43);
             this.addNewTask.TabIndex = 14;
             this.addNewTask.Text = "Add New Task";
             this.addNewTask.UseVisualStyleBackColor = false;
@@ -124,16 +137,19 @@ namespace ToDoApplication
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(31, 57);
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Segoe Print", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(37, 67);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(129, 32);
+            this.label8.Size = new System.Drawing.Size(86, 40);
             this.label8.TabIndex = 15;
-            this.label8.Text = "Task Name";
+            this.label8.Text = "Name";
             // 
             // taskName
             // 
-            this.taskName.Location = new System.Drawing.Point(177, 62);
+            this.taskName.BackColor = System.Drawing.Color.PapayaWhip;
+            this.taskName.Location = new System.Drawing.Point(140, 75);
             this.taskName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.taskName.Name = "taskName";
             this.taskName.Size = new System.Drawing.Size(229, 27);
@@ -142,13 +158,14 @@ namespace ToDoApplication
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.PapayaWhip;
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.HighButton);
             this.groupBox1.Controls.Add(this.MediumButton);
             this.groupBox1.Controls.Add(this.LowButton);
-            this.groupBox1.Location = new System.Drawing.Point(177, 153);
+            this.groupBox1.Location = new System.Drawing.Point(140, 157);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(230, 56);
             this.groupBox1.TabIndex = 17;
@@ -222,6 +239,7 @@ namespace ToDoApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::ToDoApplication.Properties.Resources.darkwood;
             this.ClientSize = new System.Drawing.Size(512, 391);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.taskName);

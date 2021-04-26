@@ -19,6 +19,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\darkwood.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\darkwood.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Homepage.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

@@ -11,9 +11,6 @@ namespace ToDoApplication
 
     public partial class Homepage : Form
     {
-        private readonly int CURRENT = 0;
-        private readonly int PREVIOUS = 1;
-        private readonly int UPCOMING = 2;
 
         public static IList<Task> previousTasks { get; set; }
         public static IList<Task> currentTasks { get; set; }
