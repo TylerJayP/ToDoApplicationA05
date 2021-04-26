@@ -66,16 +66,19 @@ namespace ToDoApplication
 
             if (dt.Date == DateTime.Today)
             {
+                addNewTask.Enabled = true;
                 Program.home.AddCurrentTask(new Task(name, dt, p, info));
                 this.Close();
             }
             else if (dt.Date > DateTime.Today)
             {
+                addNewTask.Enabled = true;
                 Program.home.AddUpcomingTask(new Task(name, dt, p, info));
                 this.Close();
             }
             else
             {
+                MessageBox.Show("Can not add tasks to previous dates... silly");
                 addNewTask.Enabled = false;
             }
         }

@@ -7,11 +7,14 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace ToDoApplication
-{
+{ 
 
     public partial class Homepage : Form
     {
-        // changed Lists to be public
+        private readonly int CURRENT = 0;
+        private readonly int PREVIOUS = 1;
+        private readonly int UPCOMING = 2;
+
         public static IList<Task> previousTasks { get; set; }
         public static IList<Task> currentTasks { get; set; }
         public static IList<Task> upcomingTasks { get; set; }
@@ -38,6 +41,9 @@ namespace ToDoApplication
 
         public void Form1_Load(object sender, EventArgs e)
         {
+            ClockTimer.Start();
+            DateLabel.Text = DateTime.Now.ToLongDateString();
+            TimeLabel.Text = DateTime.Now.ToLongTimeString();
             PopulateList(upcomingTasks, "UpcomingTasks.txt");
             PopulateList(currentTasks, "CurrentTasks.txt");
             PopulateList(previousTasks, "CompletedTasks.txt");
@@ -56,7 +62,81 @@ namespace ToDoApplication
         //Complete Task
         public void button1_Click(object sender, EventArgs e)
         {
+            //Takes task from either upcoming task or current task and deletes from those lists
+            //Then adds it to previous 
+            switch (comboBox1.SelectedIndex)
+            {
+                //Current
+                case 0:
 
+                    if (listBox4.SelectedItem == null)
+                    {
+                        InfoBox.Text = "Removed!";
+                    }
+                    else if (listBox4.SelectedItem != null && currentTasks.Count >= 1)
+                    {
+                        string selectedItem = listBox4.SelectedItem.ToString();
+                        int selectedIndex = listBox4.SelectedIndex;
+                        var cTask =
+                            from c in currentTasks
+                            where c.Name == selectedItem
+                            select c;
+                        foreach (Task tk in cTask)
+                        {
+                            previousTasks.Add(tk);
+                            currentTasks.Remove(tk);
+                        }
+                        StringBuilder s = new StringBuilder();
+                        foreach (Task t in currentTasks)
+                        {
+                            s.Append(t.ToString() + "\n");
+                        }
+                        InfoBox.Text = s.ToString();
+                        currentTasks.RemoveAt(selectedIndex);
+                    }
+                    else
+                    {
+                        InfoBox.Clear();
+                    }
+                    break; 
+
+                //Previous
+                case 1:
+                    break;
+
+                //Upcoming
+                case 2:
+                    if (listBox4.SelectedItem == null)
+                    {
+                        InfoBox.Text = "Removed!";
+                    }
+                    else if (listBox4.SelectedItem != null && currentTasks.Count >= 1)
+                    {
+                        string selectedItem = listBox4.SelectedItem.ToString();
+                        int selectedIndex = listBox4.SelectedIndex;
+                        var uTask =
+                            from u in upcomingTasks
+                            where u.Name == selectedItem
+                            select u;
+                        foreach (Task tk in uTask)
+                        {
+                            previousTasks.Add(tk);
+                            currentTasks.Remove(tk);
+                        }
+                        StringBuilder s = new StringBuilder();
+                        foreach (Task t in upcomingTasks)
+                        {
+                            s.Append(t.ToString() + "\n");
+                        }
+                        InfoBox.Text = s.ToString();
+                        previousTasks.RemoveAt(selectedIndex);
+                    }
+                    else
+                    {
+                        InfoBox.Clear();
+                    }
+                    break;
+            }
         }
 
         //New Task
@@ -72,37 +152,51 @@ namespace ToDoApplication
             int selectedIndex = comboBox1.SelectedIndex;
             Object selectedItem = comboBox1.SelectedItem;
 
-            //Index Sheet: 0 = Current || 1 = Previous || 2 = Upcoming
-            //ListBox2 is the control for this one (Current Tasks)
+            //Current Tasks
             if (selectedIndex == 0)
             {
+                //Allow complete task button
+                CompleteTask.Enabled = true;
+
                 listBox4.Visible = true;
                 listBox4.Items.Clear();
-                List<string> taskNames = new List<string>();
+                List<string> names = new List<string>();
                 foreach (Task t in currentTasks)
                 {
-                    taskNames.Add(t.Name);
+                    names.Add(t.Name);
                 }
-                listBox4.Items.AddRange(taskNames.ToArray());
+                listBox4.Items.AddRange(names.ToArray());
             }
-            //ListBox3 is the control of this one (Previous Tasks)
+            //Previous Tasks
             if (selectedIndex == 1)
             {
+                //Disallow complete task button
+                CompleteTask.Enabled = false;
+
                 listBox4.Visible = true;
                 listBox4.Items.Clear();
-                listBox4.Items.AddRange(previousTasks.ToArray());
+                List<string> names = new List<string>();
+                foreach (Task t in previousTasks)
+                {
+                    names.Add(t.Name);
+                }
+                listBox4.Items.AddRange(names.ToArray());
+
             }
-            //ListBox4 is the control of this one (Upcoming Tasks)
+            //Upcoming Tasks
             if (selectedIndex == 2)
             {
+                //Allow complete task button
+                CompleteTask.Enabled = true;
+
                 listBox4.Visible = true;
                 listBox4.Items.Clear();
-                List<string> taskNames = new List<string>();
+                List<string> names = new List<string>();
                 foreach (Task t in upcomingTasks)
                 {
-                    taskNames.Add(t.Name);
+                    names.Add(t.Name);
                 }
-                listBox4.Items.AddRange(taskNames.ToArray());
+                listBox4.Items.AddRange(names.ToArray());
 
             }
         }
@@ -113,17 +207,6 @@ namespace ToDoApplication
         {
             var updateTaskForm = new EditTaskPage(comboBox1.SelectedIndex, listBox4.SelectedIndex);
             updateTaskForm.Show();
-        }
-
-        public void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        //Main ListBox That Will Get Changed
-        public void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         public void richTextBox2_TextChanged(object sender, EventArgs e)
@@ -169,31 +252,6 @@ namespace ToDoApplication
             }
         }
 
-        //Current Tasks ListBox
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedItem = listBox4.SelectedItem.ToString();
-            if (listBox4.SelectedItem == null)
-            {
-                InfoBox.Text = "Removed!";
-            }
-            else
-            {
-                var cTask =
-                   from c in currentTasks
-                   where c.Name == selectedItem
-                   select c;
-                StringBuilder s = new StringBuilder();
-                foreach (Task t in cTask)
-                {
-                    s.Append(t.ToString() + "\n");
-                }
-                Console.WriteLine(s.ToString());
-                InfoBox.Text = s.ToString();
-            }
-
-        }
-
         //Previous Tasks ListBox
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -207,26 +265,76 @@ namespace ToDoApplication
             }
         }
 
-        //Upcoming Tasks ListBox
+        //Tasks ListBox
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedItem = listBox4.SelectedItem.ToString();
-            if (listBox4.SelectedItem == null)
+            switch(comboBox1.SelectedIndex)
             {
-                InfoBox.Text = "Removed!";
-            }
-            else
-            {
-                var uTask =
-                    from c in upcomingTasks
-                    where c.Name == selectedItem
-                    select c;
-                StringBuilder s = new StringBuilder();
-                foreach (Task t in uTask)
-                {
-                    s.Append(t.ToString() + "\n");
-                }
-                InfoBox.Text = s.ToString();
+                //Current
+                case 0:
+                    if (listBox4.SelectedItem == null)
+                    {
+                        InfoBox.Text = "Removed!";
+                    }
+                    else
+                    {
+                        string selectedItem = listBox4.SelectedItem.ToString();
+                        var cTask =
+                            from c in currentTasks
+                            where c.Name == selectedItem
+                            select c;
+                        StringBuilder s = new StringBuilder();
+                        foreach (Task t in cTask)
+                        {
+                            s.Append(t.ToString() + "\n");
+                        }
+                        InfoBox.Text = s.ToString();
+                    }
+                    break;
+
+                //Previous
+                case 1:
+                    if (listBox4.SelectedItem == null)
+                    {
+                        InfoBox.Text = "Removed!";
+                    }
+                    else
+                    {
+                        string selectedItem = listBox4.SelectedItem.ToString();
+                        var pTask =
+                            from p in previousTasks
+                            where p.Name == selectedItem
+                            select p;
+                        StringBuilder s = new StringBuilder();
+                        foreach (Task t in pTask)
+                        {
+                            s.Append(t.ToString() + "\n");
+                        }
+                        InfoBox.Text = s.ToString();
+                    }
+                    break;
+
+                //Upcoming
+                case 2:
+                    if (listBox4.SelectedItem == null)
+                    {
+                        InfoBox.Text = "Removed!";
+                    }
+                    else
+                    {
+                        string selectedItem = listBox4.SelectedItem.ToString();
+                        var uTask =
+                            from c in upcomingTasks
+                            where c.Name == selectedItem
+                            select c;
+                        StringBuilder s = new StringBuilder();
+                        foreach (Task t in uTask)
+                        {
+                            s.Append(t.ToString() + "\n");
+                        }
+                        InfoBox.Text = s.ToString();
+                    }
+                    break;
             }
         }
 
@@ -280,6 +388,11 @@ namespace ToDoApplication
             }
             string info = reader.ReadLine();
             return new ToDoApplication.Task(name, parsedDate, priorityEnum, info);
+        }
+
+        private void ClockTimer_Tick(object sender, EventArgs e)
+        {
+            TimeLabel.Text = DateTime.Now.ToLongTimeString();
         }
     }
 }

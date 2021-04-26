@@ -2,7 +2,7 @@
 namespace ToDoApplication
 {
      partial class Homepage
-    {
+     {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -29,7 +29,7 @@ namespace ToDoApplication
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.CompleteTask = new System.Windows.Forms.Button();
@@ -38,46 +38,36 @@ namespace ToDoApplication
             this.InfoBox = new System.Windows.Forms.RichTextBox();
             this.RemoveTask = new System.Windows.Forms.Button();
             this.listBox4 = new System.Windows.Forms.ListBox();
+            this.DateLabel = new System.Windows.Forms.Label();
+            this.TimeLabel = new System.Windows.Forms.Label();
+            this.ClockTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CalendarForeColor = System.Drawing.Color.Black;
-            this.dateTimePicker1.CalendarMonthBackground = System.Drawing.Color.Black;
-            this.dateTimePicker1.CalendarTitleBackColor = System.Drawing.Color.Black;
-            this.dateTimePicker1.CalendarTrailingForeColor = System.Drawing.Color.Black;
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(323, 76);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(263, 27);
-            this.dateTimePicker1.TabIndex = 0;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(165)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
+            this.label1.Font = new System.Drawing.Font("Goudy Stout", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(273, 0);
+            this.label1.Location = new System.Drawing.Point(195, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(365, 50);
+            this.label1.Size = new System.Drawing.Size(509, 51);
             this.label1.TabIndex = 1;
-            this.label1.Text = "To Do, or Not To Do?";
+            this.label1.Text = "Things To Do";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Current Tasks",
             "Previous Tasks",
             "Upcoming Tasks"});
-            this.comboBox1.Location = new System.Drawing.Point(378, 111);
+            this.comboBox1.Location = new System.Drawing.Point(355, 103);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(165, 28);
+            this.comboBox1.Size = new System.Drawing.Size(199, 36);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.Text = "Select Tasks To View";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -128,6 +118,7 @@ namespace ToDoApplication
             this.InfoBox.Location = new System.Drawing.Point(250, 330);
             this.InfoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.InfoBox.Name = "InfoBox";
+            this.InfoBox.ReadOnly = true;
             this.InfoBox.Size = new System.Drawing.Size(407, 180);
             this.InfoBox.TabIndex = 7;
             this.InfoBox.Text = "TASK INFO WILL APPEAR HERE";
@@ -159,14 +150,42 @@ namespace ToDoApplication
             this.listBox4.Visible = false;
             this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
             // 
+            // DateLabel
+            // 
+            this.DateLabel.AutoSize = true;
+            this.DateLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DateLabel.Location = new System.Drawing.Point(12, 111);
+            this.DateLabel.Name = "DateLabel";
+            this.DateLabel.Size = new System.Drawing.Size(76, 31);
+            this.DateLabel.TabIndex = 13;
+            this.DateLabel.Text = "label2";
+            this.DateLabel.Click += new System.EventHandler(this.Form1_Load);
+            // 
+            // TimeLabel
+            // 
+            this.TimeLabel.AutoSize = true;
+            this.TimeLabel.Location = new System.Drawing.Point(12, 147);
+            this.TimeLabel.Name = "TimeLabel";
+            this.TimeLabel.Size = new System.Drawing.Size(50, 20);
+            this.TimeLabel.TabIndex = 14;
+            this.TimeLabel.Text = "label3";
+            this.TimeLabel.Click += new System.EventHandler(this.Form1_Load);
+            // 
+            // ClockTimer
+            // 
+            this.ClockTimer.Enabled = true;
+            this.ClockTimer.Tick += new System.EventHandler(this.ClockTimer_Tick);
+            // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            //this.BackgroundImage = global::ToDoApplication.Properties.Resources.woodshop;
+            this.BackgroundImage = global::ToDoApplication.Properties.Resources.woodshop;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(887, 662);
+            this.Controls.Add(this.TimeLabel);
+            this.Controls.Add(this.DateLabel);
             this.Controls.Add(this.listBox4);
             this.Controls.Add(this.RemoveTask);
             this.Controls.Add(this.InfoBox);
@@ -175,7 +194,6 @@ namespace ToDoApplication
             this.Controls.Add(this.CompleteTask);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Homepage";
             this.Text = "Form1";
@@ -186,8 +204,6 @@ namespace ToDoApplication
         }
 
         #endregion
-
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button CompleteTask;
@@ -196,6 +212,9 @@ namespace ToDoApplication
         private System.Windows.Forms.RichTextBox InfoBox;
         private System.Windows.Forms.Button RemoveTask;
         private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.Label DateLabel;
+        private System.Windows.Forms.Label TimeLabel;
+        private System.Windows.Forms.Timer ClockTimer;
     }
 }
 
