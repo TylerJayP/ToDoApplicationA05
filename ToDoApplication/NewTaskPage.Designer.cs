@@ -59,7 +59,6 @@ namespace ToDoApplication
             this.label1.Size = new System.Drawing.Size(175, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "New Task";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dateTimePicker1
             // 
@@ -71,7 +70,6 @@ namespace ToDoApplication
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(272, 29);
             this.dateTimePicker1.TabIndex = 1;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label2
             // 
@@ -84,7 +82,6 @@ namespace ToDoApplication
             this.label2.Size = new System.Drawing.Size(72, 40);
             this.label2.TabIndex = 2;
             this.label2.Text = "Date";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -97,7 +94,6 @@ namespace ToDoApplication
             this.label3.Size = new System.Drawing.Size(109, 40);
             this.label3.TabIndex = 3;
             this.label3.Text = "Priority";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // TaskInfo
             // 
@@ -108,7 +104,6 @@ namespace ToDoApplication
             this.TaskInfo.Size = new System.Drawing.Size(229, 88);
             this.TaskInfo.TabIndex = 12;
             this.TaskInfo.Text = "";
-            this.TaskInfo.TextChanged += new System.EventHandler(this.TaskInfo_TextChanged);
             // 
             // label7
             // 
@@ -154,7 +149,6 @@ namespace ToDoApplication
             this.taskName.Name = "taskName";
             this.taskName.Size = new System.Drawing.Size(229, 27);
             this.taskName.TabIndex = 16;
-            this.taskName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // groupBox1
             // 
@@ -256,7 +250,6 @@ namespace ToDoApplication
             this.Name = "NewTaskPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Medium";
-            this.Load += new System.EventHandler(this.NewTaskPage_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

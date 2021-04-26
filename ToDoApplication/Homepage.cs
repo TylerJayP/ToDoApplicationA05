@@ -8,10 +8,11 @@ using System.Windows.Forms;
 
 namespace ToDoApplication
 { 
-
+    /// <summary>
+    /// Creating our main Lists for each task to be saved and used for the get and set properties.
+    /// </summary>
     public partial class Homepage : Form
     {
-
         public static IList<Task> previousTasks { get; set; }
         public static IList<Task> currentTasks { get; set; }
         public static IList<Task> upcomingTasks { get; set; }
@@ -35,17 +36,23 @@ namespace ToDoApplication
             currentTasks.Add(task);
         }
 
+        /// <summary>
+        /// Loading the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Form1_Load(object sender, EventArgs e)
         {
             ClockTimer.Start();
             DateLabel.Text = DateTime.Now.ToLongDateString();
             TimeLabel.Text = DateTime.Now.ToLongTimeString();
-            PopulateList(upcomingTasks, "UpcomingTasks.txt");
-            PopulateList(currentTasks, "CurrentTasks.txt");
-            PopulateList(previousTasks, "CompletedTasks.txt");
         }
 
-        //Complete Task
+        /// <summary>
+        /// User presses "Completed" on a selected task and that task will be removed from upcomingtasks or currenttasks and moved into previoustasks
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void button1_Click(object sender, EventArgs e)
         {
             //Takes task from either upcoming task or current task and deletes from those lists
@@ -54,7 +61,6 @@ namespace ToDoApplication
             {
                 //Current
                 case 0:
-
                     if (listBox4.SelectedItem == null)
                     {
                         InfoBox.Text = "Removed!";
@@ -81,7 +87,6 @@ namespace ToDoApplication
                         {
                             s.Append(t.ToString() + "\n");
                         }
-
                         InfoBox.Text = s.ToString();
                     }
                     else
@@ -89,11 +94,9 @@ namespace ToDoApplication
                         InfoBox.Clear();
                     }
                     break;
-
                 //Previous
                 case 1:
                     break;
-
                 //Upcoming
                 case 2:
                     if (listBox4.SelectedItem == null)
@@ -118,13 +121,11 @@ namespace ToDoApplication
                             }
                             break;
                         }
-
                         StringBuilder s = new StringBuilder();
                         foreach (Task t in upcomingTasks)
                         {
                             s.Append(t.ToString() + "\n");
                         }
-
                         InfoBox.Text = s.ToString();
                     }
                     else
@@ -135,14 +136,24 @@ namespace ToDoApplication
             }
         }
 
-        //New Task
+        /// <summary>
+        /// Opens NewTaskPage Form for user to create a new task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void button2_Click(object sender, EventArgs e)
         {
             var newTaskForm = new NewTaskPage();
             newTaskForm.Show();
         }
 
-        //User selects Upcoming/Previous/Current
+        /// <summary>
+        /// Sees what index on the combobox is selected to determine which listbox we are viewing.
+        /// Adding the specific text files based on comobox.
+        /// Populating the listboxes with our textfile and sorting it based on date and then priority.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = comboBox1.SelectedIndex;
@@ -153,15 +164,16 @@ namespace ToDoApplication
             {
                 //Allow complete task button
                 CompleteTask.Enabled = true;
-
                 listBox4.Items.Clear();
                 List<string> names = new List<string>();
-                foreach (Task t in currentTasks)
+                var cSortedList = currentTasks.OrderBy(xx => xx.dt).ThenBy(x => x.p).ToList();
+                foreach (Task t in cSortedList)
                 {
                     names.Add(t.Name);
                 }
                 listBox4.Items.AddRange(names.ToArray());
             }
+
             //Previous Tasks
             if (selectedIndex == 1)
             {
@@ -170,13 +182,15 @@ namespace ToDoApplication
 
                 listBox4.Items.Clear();
                 List<string> names = new List<string>();
-                foreach (Task t in previousTasks)
+                var pSortedList = previousTasks.OrderBy(y => y.p).ToList();
+                foreach (Task t in pSortedList)
                 {
                     names.Add(t.Name);
                 }
                 listBox4.Items.AddRange(names.ToArray());
 
             }
+
             //Upcoming Tasks
             if (selectedIndex == 2)
             {
@@ -185,80 +199,65 @@ namespace ToDoApplication
 
                 listBox4.Items.Clear();
                 List<string> names = new List<string>();
-                foreach (Task t in upcomingTasks)
+                var uSortedList = upcomingTasks.OrderBy(zz => zz.dt).ThenBy(z => z.p).ToList();
+                foreach (Task t in uSortedList)
                 {
-                    names.Add(t.Name);
+                    names.Add(t.Name + " " + t.dt.ToShortDateString());
                 }
                 listBox4.Items.AddRange(names.ToArray());
 
             }
         }
 
-        //Edit Button
-        //Changing the form parameters allows for passing of form controls along with their methods
+        /// <summary>
+        /// Opens EditTaskPage Form for user to edit a task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void button3_Click(object sender, EventArgs e)
         {
             var updateTaskForm = new EditTaskPage(comboBox1.SelectedIndex, listBox4.SelectedIndex);
             updateTaskForm.Show();
         }
 
-        public void richTextBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        //Remove Task
+        /// <summary>
+        /// Removing the task using the remove button. Also, it's removing it from the file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveTask_Click(object sender, EventArgs e)
         {
             //Removing selected item(s) from Current Tasks
             ListBox.SelectedObjectCollection currentItems = new ListBox.SelectedObjectCollection(listBox4);
             currentItems = listBox4.SelectedItems;
-
             if (listBox4.SelectedIndex != -1)
             {
-                for (int i = currentItems.Count - 1; i >= 0; i--)
-                {
-                    listBox4.Items.Remove(currentItems[i]);
-                }
+                currentTasks.RemoveAt(listBox4.SelectedIndex);
+                listBox4.Items.RemoveAt(listBox4.SelectedIndex);                         
             }
-
             //Removing selected item(s) from Previous Tasks
             ListBox.SelectedObjectCollection previousItems = new ListBox.SelectedObjectCollection(listBox4);
             previousItems = listBox4.SelectedItems;
             if (listBox4.SelectedIndex != -1)
             {
-                for (int h = previousItems.Count - 1; h >= 0; h--)
-                {
-                    listBox4.Items.Remove(previousItems[h]);
-                }
+                previousTasks.RemoveAt(listBox4.SelectedIndex);
+                listBox4.Items.RemoveAt(listBox4.SelectedIndex);               
             }
-
             //Removing selected item(s) from Upcoming Tasks
             ListBox.SelectedObjectCollection upcomingItems = new ListBox.SelectedObjectCollection(listBox4);
             upcomingItems = listBox4.SelectedItems;
             if (listBox4.SelectedIndex != -1)
             {
-                for (int j = upcomingItems.Count - 1; j >= 0; j--)
-                {
-                    listBox4.Items.Remove(upcomingItems[j]);
-                }
+                upcomingTasks.RemoveAt(listBox4.SelectedIndex);
+                listBox4.Items.RemoveAt(listBox4.SelectedIndex);              
             }
         }
 
-        //Previous Tasks ListBox
-        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBox4.SelectedItem == null)
-            {
-                InfoBox.Text = "Removed!";
-            }
-            else
-            {
-                InfoBox.Text = listBox4.SelectedItem.ToString();
-            }
-        }
-
-        //Tasks ListBox
+        /// <summary>
+        /// Prints the information from the specfic list into the richtextbox(infobox)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch(comboBox1.SelectedIndex)
@@ -270,11 +269,11 @@ namespace ToDoApplication
                         InfoBox.Text = "Removed!";
                     }
                     else
-                    {
+                    {                       
                         string selectedItem = listBox4.SelectedItem.ToString();
                         var cTask =
                             from c in currentTasks
-                            where c.Name == selectedItem
+                            where c.Name == selectedItem                         
                             select c;
                         StringBuilder s = new StringBuilder();
                         foreach (Task t in cTask)
@@ -284,7 +283,6 @@ namespace ToDoApplication
                         InfoBox.Text = s.ToString();
                     }
                     break;
-
                 //Previous
                 case 1:
                     if (listBox4.SelectedItem == null)
@@ -306,7 +304,6 @@ namespace ToDoApplication
                         InfoBox.Text = s.ToString();
                     }
                     break;
-
                 //Upcoming
                 case 2:
                     if (listBox4.SelectedItem == null)
@@ -331,6 +328,11 @@ namespace ToDoApplication
             }
         }
 
+        /// <summary>
+        /// Creating a txt file that we will be populated with tasks that the user is inputting
+        /// </summary>
+        /// <param name="taskList"></param>
+        /// <param name="folder"></param>
         private void PopulateList(IList<Task> taskList, string folder)
         {
             string line;
@@ -356,6 +358,12 @@ namespace ToDoApplication
             }
         }
 
+        /// <summary>
+        /// Reads information from txt file and converts it into new Task Object
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         private ToDoApplication.Task readTask(string folder, StreamReader reader)
         {
             string name = reader.ReadLine();
@@ -363,7 +371,6 @@ namespace ToDoApplication
             var parsedDate = DateTime.Parse(dateTime);
             string priority = reader.ReadLine();
             Priority priorityEnum;
-
             switch (priority)
             {
                 case "LOW":
@@ -383,14 +390,89 @@ namespace ToDoApplication
             return new ToDoApplication.Task(name, parsedDate, priorityEnum, info);
         }
 
+        /// <summary>
+        /// Creating a timer on the time to countiously count while the GUI is showing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
             TimeLabel.Text = DateTime.Now.ToLongTimeString();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Printing to each specific txt file.
+        /// </summary>
+        /// <param name="file"></param>
+        public void printingToFile(string file)
         {
+            using (StreamWriter sw = new(file, false))
+            {
+                if (file == "CurrentTasks.txt")
+                {
+                    foreach (Task t in currentTasks)
+                    {
+                        sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                    }
+                }
+                if (file == "PreviousTasks.txt")
+                {
+                    foreach (Task t in previousTasks)
+                    {
+                        sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                    }
+                }
+                if (file == "UpcomingTasks.txt")
+                {
+                    foreach (Task t in upcomingTasks)
+                    {
+                        sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                    }
+                }
+            }
+        }
 
+        /// <summary>
+        /// Initializng each txt file to be printing out in a way that the GUI can convert to show the correct information
+        /// in the correct places.
+        /// </summary>
+        /// <param name="file"></param>
+        public void intializeList(String file)
+        {
+            using (StreamReader sr = new StreamReader(file))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] aligning = line.Split(',');
+                    Priority priorityEnum;
+                    switch (aligning[2])
+                    {
+                        case "LOW":
+                            priorityEnum = Priority.LOW;
+                            break;
+                        case "MEDIUM":
+                            priorityEnum = Priority.MEDIUM;
+                            break;
+                        default:
+                            priorityEnum = Priority.HIGH;
+                            break;
+                    }
+                    switch (file)
+                    {
+                        case "UpcomingTasks.txt":
+                            upcomingTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
+                            break;
+                        case "CurrentTasks.txt":
+                            currentTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
+                            break;
+                        case "PreviousTasks.txt":
+                            previousTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
+                            break;
+                        default: break;
+                    }                   
+                }
+            }
         }
     }
 }

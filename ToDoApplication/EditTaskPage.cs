@@ -5,16 +5,25 @@ using System.Collections.Generic;
 
 namespace ToDoApplication
 {
+    /// <summary>
+    /// Editing Task Form Start
+    /// </summary>
     public partial class EditTaskPage : Form
     {
         public int cbIndex;
         public int lbIndex;
+        /// <summary>
+        /// Passing in the index of ComboBox and ListBox to set later for editing tasks based on those indexes.
+        /// </summary>
+        /// <param name="comboBoxIndex"></param>
+        /// <param name="listBoxIndex"></param>
         public EditTaskPage(int comboBoxIndex, int listBoxIndex)
         {
             InitializeComponent();
             this.Text = "Update Task";
             cbIndex = comboBoxIndex;
             lbIndex = listBoxIndex;
+
             // comboIndex determines which task list is selected
             // lbIndex determines which task of the list is selected
             // Had to make the task lists public static in order to get the data from different forms for easier data processing
@@ -35,7 +44,6 @@ namespace ToDoApplication
                 else
                     highPriority.Checked = true;
             }
-
             if (cbIndex == 1 && Homepage.previousTasks.Any())
             {
                 EditNameBox.Text = Homepage.previousTasks[lbIndex].Name;
@@ -53,7 +61,6 @@ namespace ToDoApplication
                 else
                     highPriority.Checked = true;
             }
-
             if (cbIndex == 2 && Homepage.upcomingTasks.Any())
             {
                 EditNameBox.Text = Homepage.upcomingTasks[lbIndex].Name;
@@ -73,6 +80,11 @@ namespace ToDoApplication
             }
         }
 
+        /// <summary>
+        /// Allowing user to update task that is currently selected in Homepage and getting the index on which combobox and listbox is being used.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void updateButton_Click(object sender, EventArgs e)
         {
             DateTime dt = EditDateBox.Value;
@@ -130,11 +142,9 @@ namespace ToDoApplication
 
             if (cbIndex == 2)
             {
-
                 Homepage.upcomingTasks[lbIndex].Name = EditNameBox.Text;
                 Homepage.upcomingTasks[lbIndex].info = EditInfoBox.Text;
                 Homepage.upcomingTasks[lbIndex].dt = EditDateBox.Value;
-
                 if (lowPriority.Checked == true)
                 {
                     Homepage.upcomingTasks[lbIndex].p = Priority.LOW;
@@ -151,14 +161,12 @@ namespace ToDoApplication
                     this.Close();
                 }
             }
-
             if (lowPriority.Checked == true)
                 p = Priority.LOW;
             else if (mediumPriority.Checked == true)
                 p = Priority.MEDIUM;
             else
                 p = Priority.HIGH;
-
             // Adds and delete tasks if edited date is changed
             if (dt.Date > DateTime.Today && Homepage.currentTasks.Any())
             {
@@ -173,31 +181,5 @@ namespace ToDoApplication
                 this.Close();
             }
         }
-            //Date
-            private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-            {
-
-            }
-
-            //User Task information
-            private void richTextBox1_TextChanged(object sender, EventArgs e)
-            {
-
-            }
-
-            private void lowPriority_CheckedChanged(object sender, EventArgs e)
-            {
-
-            }
-
-            private void mediumPriority_CheckedChanged(object sender, EventArgs e)
-            {
-
-            }
-
-            private void highPriority_CheckedChanged(object sender, EventArgs e)
-            {
-
-            }
-        }
     }
+}

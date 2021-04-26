@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace ToDoApplication
 {
+    /// <summary>
+    /// Creates a New Task Form that the user will be able to create new tasks
+    /// </summary>
     public partial class NewTaskPage : Form
     {
         public NewTaskPage()
@@ -17,40 +20,13 @@ namespace ToDoApplication
             InitializeComponent();
             this.Text = "New Task";
         }
-        public void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        public void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public void LowButton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void MediumButton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void HighButton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        public void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// When "Add Task" is clicked, whatever the user has input and selected will be sent over to the listboxes that represent which
+        /// date the user has input.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void AddNewTask_Click(object sender, EventArgs e)
         {
             string name = taskName.Text;
@@ -82,34 +58,17 @@ namespace ToDoApplication
                 addNewTask.Enabled = false;
             }
         }
-
-        public void TaskInfo_TextChanged(object sender, EventArgs e)
-        {
-            /*string taskInfo;
-            taskInfo = richTextBox1.Text;*/
-        }
-
-        public void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void NewTaskPage_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Creates a groubox that controls that only one radiobutton can be selected at a time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void groupBox1_Enter(object sender, EventArgs e)
         {
             groupBox1.Controls.Add(LowButton);
             groupBox1.Controls.Add(MediumButton);
             groupBox1.Controls.Add(HighButton);
             Controls.Add(groupBox1);
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

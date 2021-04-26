@@ -112,7 +112,6 @@ namespace ToDoApplication
             this.EditDateBox.Name = "EditDateBox";
             this.EditDateBox.Size = new System.Drawing.Size(279, 29);
             this.EditDateBox.TabIndex = 6;
-            this.EditDateBox.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // lowPriority
             // 
@@ -123,7 +122,6 @@ namespace ToDoApplication
             this.lowPriority.TabIndex = 7;
             this.lowPriority.TabStop = true;
             this.lowPriority.UseVisualStyleBackColor = true;
-            this.lowPriority.CheckedChanged += new System.EventHandler(this.lowPriority_CheckedChanged);
             // 
             // mediumPriority
             // 
@@ -134,7 +132,6 @@ namespace ToDoApplication
             this.mediumPriority.TabIndex = 8;
             this.mediumPriority.TabStop = true;
             this.mediumPriority.UseVisualStyleBackColor = true;
-            this.mediumPriority.CheckedChanged += new System.EventHandler(this.mediumPriority_CheckedChanged);
             // 
             // highPriority
             // 
@@ -145,7 +142,6 @@ namespace ToDoApplication
             this.highPriority.TabIndex = 9;
             this.highPriority.TabStop = true;
             this.highPriority.UseVisualStyleBackColor = true;
-            this.highPriority.CheckedChanged += new System.EventHandler(this.highPriority_CheckedChanged);
             // 
             // label6
             // 
@@ -186,7 +182,6 @@ namespace ToDoApplication
             this.EditInfoBox.Size = new System.Drawing.Size(247, 99);
             this.EditInfoBox.TabIndex = 13;
             this.EditInfoBox.Text = "";
-            this.EditInfoBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // updateButton
             // 
