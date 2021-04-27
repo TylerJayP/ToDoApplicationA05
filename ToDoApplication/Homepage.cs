@@ -213,7 +213,7 @@ namespace ToDoApplication
                 List<string> names = new List();
                 foreach (Task t in upcomingTasks)
                 {
-                    names.Add(t.Name);
+                    names.Add(t.Name + " : " + t.dt.ToShortDateString());
                 }
                 listBox4.Items.AddRange(names.ToArray());
             }
