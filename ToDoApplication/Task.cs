@@ -43,7 +43,6 @@ namespace ToDoApplication
         public int CompareTo(Task other)
         {
             return this.p.CompareTo(other.p);
-            //throw new NotImplementedException();
         }
     }
 }

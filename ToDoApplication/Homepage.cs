@@ -176,9 +176,9 @@ namespace ToDoApplication
                 //Allow complete task button
                 CompleteTask.Enabled = true;
                 listBox4.Items.Clear();
-                List<string> names = new List<string>();
-                var cSortedList = currentTasks.OrderBy(xx => xx.dt).ThenBy(x => x.p).ToList();
-                foreach (Task t in cSortedList)
+                currentTasks.OrderBy(xx => xx.dt).ThenBy(x => x.p).ToList();
+                List<string> names = new List();
+                foreach(Task t in currentTasks)
                 {
                     names.Add(t.Name);
                 }
@@ -192,9 +192,9 @@ namespace ToDoApplication
                 CompleteTask.Enabled = false;
 
                 listBox4.Items.Clear();
-                List<string> names = new List<string>();
-                var pSortedList = previousTasks.OrderBy(y => y.p).ToList();
-                foreach (Task t in pSortedList)
+                previousTasks.OrderBy(y => y.p).ToList();
+                List<string> names = new List();
+                foreach (Task t in previousTasks)
                 {
                     names.Add(t.Name);
                 }
@@ -209,14 +209,13 @@ namespace ToDoApplication
                 CompleteTask.Enabled = true;
 
                 listBox4.Items.Clear();
-                List<string> names = new List<string>();
-                var uSortedList = upcomingTasks.OrderBy(zz => zz.dt).ThenBy(z => z.p).ToList();
-                foreach (Task t in uSortedList)
+                upcomingTasks.OrderBy(zz => zz.dt).ThenBy(z => z.p).ToList();
+                List<string> names = new List();
+                foreach (Task t in upcomingTasks)
                 {
-                    names.Add(t.Name + " : " + t.dt.ToShortDateString());
+                    names.Add(t.Name);
                 }
                 listBox4.Items.AddRange(names.ToArray());
-
             }
         }
 
@@ -498,7 +497,7 @@ namespace ToDoApplication
                     }
                 }
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 Console.WriteLine("StreamReader is not functioning correctly");
             }

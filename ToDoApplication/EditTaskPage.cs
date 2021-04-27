@@ -29,21 +29,15 @@ namespace ToDoApplication
             // Had to make the task lists public static in order to get the data from different forms for easier data processing
             if (cbIndex == 0 && Homepage.currentTasks.Any())
             {
-                List<string> names = new List<string>();
-                var cSortedList = Homepage.currentTasks.OrderBy(xx => xx.dt).ThenBy(x => x.p).ToList();
-                foreach (Task t in cSortedList)
-                {
-                    names.Add(t.Name);
-                }
-                EditNameBox.Text = cSortedList[lbIndex].Name;
-                EditInfoBox.Text = cSortedList[lbIndex].info;
-                EditDateBox.Value = cSortedList[lbIndex].dt;
+                EditNameBox.Text = Homepage.currentTasks[lbIndex].Name;
+                EditInfoBox.Text = Homepage.currentTasks[lbIndex].info;
+                EditDateBox.Value = Homepage.currentTasks[lbIndex].dt;
 
-                if (cSortedList[lbIndex].p == Priority.LOW)
+                if (Homepage.currentTasks[lbIndex].p == Priority.LOW)
                 {
                     lowPriority.Checked = true;
                 }
-                else if (cSortedList[lbIndex].p == Priority.MEDIUM)
+                else if (Homepage.currentTasks[lbIndex].p == Priority.MEDIUM)
                 {
                     mediumPriority.Checked = true;
                 }
@@ -69,21 +63,15 @@ namespace ToDoApplication
             }
             if (cbIndex == 2 && Homepage.upcomingTasks.Any())
             {
-                List<string> names = new List<string>();
-                var uSortedList = Homepage.upcomingTasks.OrderBy(xx => xx.dt).ThenBy(x => x.p).ToList();
-                foreach (Task t in uSortedList)
-                {
-                    names.Add(t.Name);
-                }
-                EditNameBox.Text = uSortedList[lbIndex].Name;
-                EditInfoBox.Text = uSortedList[lbIndex].info;
-                EditDateBox.Value = uSortedList[lbIndex].dt;
+                EditNameBox.Text = Homepage.upcomingTasks[lbIndex].Name;
+                EditInfoBox.Text = Homepage.upcomingTasks[lbIndex].info;
+                EditDateBox.Value = Homepage.upcomingTasks[lbIndex].dt;
 
-                if (uSortedList[lbIndex].p == Priority.LOW)
+                if (Homepage.upcomingTasks[lbIndex].p == Priority.LOW)
                 {
                     lowPriority.Checked = true;
                 }
-                else if (uSortedList[lbIndex].p == Priority.MEDIUM)
+                else if (Homepage.upcomingTasks[lbIndex].p == Priority.MEDIUM)
                 {
                     mediumPriority.Checked = true;
                 }
@@ -183,15 +171,13 @@ namespace ToDoApplication
                 p = Priority.HIGH;
             // Adds and delete tasks if edited date is changed
             if (dt.Date > DateTime.Today && Homepage.currentTasks.Any())
-            {
-                Homepage.currentTasks.OrderBy(t => t.Name);
+            { 
                 Homepage.currentTasks.RemoveAt(lbIndex);
                 Program.home.AddUpcomingTask(new Task(name, dt, p, info));
                 this.Close();
             }
             else if(dt.Date == DateTime.Today && Homepage.upcomingTasks.Any())
             {
-                Homepage.upcomingTasks.OrderBy(t => t.Name);
                 Homepage.upcomingTasks.RemoveAt(lbIndex);
                 Program.home.AddCurrentTask(new Task(name, dt, p, info));
                 this.Close();
