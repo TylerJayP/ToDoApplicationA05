@@ -70,5 +70,11 @@ namespace ToDoApplication
             groupBox1.Controls.Add(HighButton);
             Controls.Add(groupBox1);
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker1.Value >= DateTime.Today)
+                addNewTask.Enabled = true;
+        }
     }
 }

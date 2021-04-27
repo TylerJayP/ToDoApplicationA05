@@ -17,6 +17,9 @@ namespace ToDoApplication
         public static IList<Task> currentTasks { get; set; }
         public static IList<Task> upcomingTasks { get; set; }
 
+        /// <summary>
+        /// Constructs new instance of homepage
+        /// </summary>
         public Homepage()
         {
             previousTasks = new List<Task>();
@@ -26,11 +29,19 @@ namespace ToDoApplication
             this.Text = "ToDo Application";
         }
 
+        /// <summary>
+        /// Helper method for updating upcoming tasks
+        /// </summary>
+        /// <param name="task"></param>
         public void AddUpcomingTask(Task task)
         {
             upcomingTasks.Add(task);
         }
 
+        /// <summary>
+        /// Helper method for updating current tasks
+        /// </summary>
+        /// <param name="task"></param>
         public void AddCurrentTask(Task task)
         {
             currentTasks.Add(task);
@@ -109,7 +120,7 @@ namespace ToDoApplication
                         int selectedIndex = listBox4.SelectedIndex;
                         var uTask =
                             from u in upcomingTasks
-                            where u.Name == selectedItem
+                            where u.Name == selectedItem.Substring(0, u.Name.Length)
                             select u;
                         foreach (Task tk in uTask)
                         {
@@ -230,7 +241,7 @@ namespace ToDoApplication
             //Removing selected item(s) from Current Tasks
             ListBox.SelectedObjectCollection currentItems = new ListBox.SelectedObjectCollection(listBox4);
             currentItems = listBox4.SelectedItems;
-            if (listBox4.SelectedIndex != -1)
+            if (listBox4.SelectedIndex != -1 &&  comboBox1.SelectedIndex == 0)
             {
                 currentTasks.RemoveAt(listBox4.SelectedIndex);
                 listBox4.Items.RemoveAt(listBox4.SelectedIndex);                         
@@ -238,7 +249,7 @@ namespace ToDoApplication
             //Removing selected item(s) from Previous Tasks
             ListBox.SelectedObjectCollection previousItems = new ListBox.SelectedObjectCollection(listBox4);
             previousItems = listBox4.SelectedItems;
-            if (listBox4.SelectedIndex != -1)
+            if (listBox4.SelectedIndex != -1 && comboBox1.SelectedIndex == 1)
             {
                 previousTasks.RemoveAt(listBox4.SelectedIndex);
                 listBox4.Items.RemoveAt(listBox4.SelectedIndex);               
@@ -246,7 +257,7 @@ namespace ToDoApplication
             //Removing selected item(s) from Upcoming Tasks
             ListBox.SelectedObjectCollection upcomingItems = new ListBox.SelectedObjectCollection(listBox4);
             upcomingItems = listBox4.SelectedItems;
-            if (listBox4.SelectedIndex != -1)
+            if (listBox4.SelectedIndex != -1 && comboBox1.SelectedIndex == 2)
             {
                 upcomingTasks.RemoveAt(listBox4.SelectedIndex);
                 listBox4.Items.RemoveAt(listBox4.SelectedIndex);              
@@ -314,9 +325,9 @@ namespace ToDoApplication
                     {
                         string selectedItem = listBox4.SelectedItem.ToString();
                         var uTask =
-                            from c in upcomingTasks
-                            where c.Name == selectedItem
-                            select c;
+                            from u in upcomingTasks
+                            where u.Name == selectedItem.Substring(0, u.Name.Length)
+                            select u;
                         StringBuilder s = new StringBuilder();
                         foreach (Task t in uTask)
                         {
@@ -406,30 +417,38 @@ namespace ToDoApplication
         /// <param name="file"></param>
         public void printingToFile(string file)
         {
-            using (StreamWriter sw = new(file, false))
+            try
             {
-                if (file == "CurrentTasks.txt")
+                using (StreamWriter sw = new(file, false))
                 {
-                    foreach (Task t in currentTasks)
+                    if (file == "CurrentTasks.txt")
                     {
-                        sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                        foreach (Task t in currentTasks)
+                        {
+                            sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                        }
                     }
-                }
-                if (file == "PreviousTasks.txt")
-                {
-                    foreach (Task t in previousTasks)
+                    if (file == "PreviousTasks.txt")
                     {
-                        sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                        foreach (Task t in previousTasks)
+                        {
+                            sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                        }
                     }
-                }
-                if (file == "UpcomingTasks.txt")
-                {
-                    foreach (Task t in upcomingTasks)
+                    if (file == "UpcomingTasks.txt")
                     {
-                        sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                        foreach (Task t in upcomingTasks)
+                        {
+                            sw.WriteLine(string.Format("{0},{1},{2},{3}", t.Name, t.dt, t.p, t.info));
+                        }
                     }
                 }
             }
+            catch (IOException)
+            {
+                Console.WriteLine("StreamWriter is not functioning correctly.");
+            }
+           
         }
 
         /// <summary>
@@ -439,40 +458,48 @@ namespace ToDoApplication
         /// <param name="file"></param>
         public void intializeList(String file)
         {
-            using (StreamReader sr = new StreamReader(file))
+            try
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(file))
                 {
-                    string[] aligning = line.Split(',');
-                    Priority priorityEnum;
-                    switch (aligning[2])
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        case "LOW":
-                            priorityEnum = Priority.LOW;
-                            break;
-                        case "MEDIUM":
-                            priorityEnum = Priority.MEDIUM;
-                            break;
-                        default:
-                            priorityEnum = Priority.HIGH;
-                            break;
+                        string[] aligning = line.Split(',');
+                        Priority priorityEnum;
+                        switch (aligning[2])
+                        {
+                            case "LOW":
+                                priorityEnum = Priority.LOW;
+                                break;
+                            case "MEDIUM":
+                                priorityEnum = Priority.MEDIUM;
+                                break;
+                            default:
+                                priorityEnum = Priority.HIGH;
+                                break;
+                        }
+                        switch (file)
+                        {
+                            case "UpcomingTasks.txt":
+                                upcomingTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
+                                break;
+                            case "CurrentTasks.txt":
+                                currentTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
+                                break;
+                            case "PreviousTasks.txt":
+                                previousTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
+                                break;
+                            default: break;
+                        }
                     }
-                    switch (file)
-                    {
-                        case "UpcomingTasks.txt":
-                            upcomingTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
-                            break;
-                        case "CurrentTasks.txt":
-                            currentTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
-                            break;
-                        case "PreviousTasks.txt":
-                            previousTasks.Add(new Task(aligning[0], DateTime.Parse(aligning[1]), priorityEnum, aligning[3]));
-                            break;
-                        default: break;
-                    }                   
                 }
             }
+            catch (IOException e)
+            {
+                Console.WriteLine("StreamReader is not functioning correctly");
+            }
+            
         }
     }
 }
