@@ -184,12 +184,14 @@ namespace ToDoApplication
             // Adds and delete tasks if edited date is changed
             if (dt.Date > DateTime.Today && Homepage.currentTasks.Any())
             {
+                Homepage.currentTasks.OrderBy(t => t.Name);
                 Homepage.currentTasks.RemoveAt(lbIndex);
                 Program.home.AddUpcomingTask(new Task(name, dt, p, info));
                 this.Close();
             }
             else if(dt.Date == DateTime.Today && Homepage.upcomingTasks.Any())
             {
+                Homepage.upcomingTasks.OrderBy(t => t.Name);
                 Homepage.upcomingTasks.RemoveAt(lbIndex);
                 Program.home.AddCurrentTask(new Task(name, dt, p, info));
                 this.Close();
