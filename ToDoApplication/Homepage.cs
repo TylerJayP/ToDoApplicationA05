@@ -213,7 +213,7 @@ namespace ToDoApplication
                 var uSortedList = upcomingTasks.OrderBy(zz => zz.dt).ThenBy(z => z.p).ToList();
                 foreach (Task t in uSortedList)
                 {
-                    names.Add(t.Name + " " + t.dt.ToShortDateString());
+                    names.Add(t.Name + " : " + t.dt.ToShortDateString());
                 }
                 listBox4.Items.AddRange(names.ToArray());
 
@@ -323,17 +323,20 @@ namespace ToDoApplication
                     }
                     else
                     {
-                        string selectedItem = listBox4.SelectedItem.ToString();
+                        string selectedItem = listBox4.SelectedItem.ToString().Split(" : ")[0];
+                        string selectedDate = listBox4.SelectedItem.ToString().Split(" : ")[1];
+
                         var uTask =
-                            from u in upcomingTasks
-                            where u.Name == selectedItem.Substring(0, u.Name.Length)
-                            select u;
+                        from u in upcomingTasks
+                        where selectedItem == u.Name && selectedDate == u.dt.ToShortDateString()
+                        select u;
                         StringBuilder s = new StringBuilder();
-                        foreach (Task t in uTask)
+                        foreach (Task u in uTask)
                         {
-                            s.Append(t.ToString() + "\n");
+                            s.Append(u.ToString() + "\n");
                         }
                         InfoBox.Text = s.ToString();
+   
                     }
                     break;
             }
