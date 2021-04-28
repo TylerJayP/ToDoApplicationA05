@@ -111,7 +111,8 @@ namespace ToDoApplication
                         Homepage.currentTasks.RemoveAt(lbIndex);
                         break;
                     case -1:
-                        Program.home.ErrorMessage("Date was not changed, as it was before the current date. Sorry, beautiful.");
+                        if (EditDateBox.Value < DateTime.Today)
+                            Program.home.ErrorMessage("Date was not changed, as it was before the current date. Sorry, beautiful.");
                         break;
                     default:
                         Homepage.currentTasks[lbIndex].dt = EditDateBox.Value;
@@ -144,7 +145,7 @@ namespace ToDoApplication
                 {
                     Homepage.upcomingTasks[lbIndex].p = Priority.HIGH;
                 }
-                switch (EditDateBox.Value.CompareTo(Homepage.currentTasks[lbIndex].dt))
+                switch (EditDateBox.Value.CompareTo(Homepage.upcomingTasks[lbIndex].dt))
                 {
                     case 1:
                         Homepage.upcomingTasks[lbIndex].dt = EditDateBox.Value;
