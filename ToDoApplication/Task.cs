@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ToDoApplication
 {
     /// <summary>
     /// Class with get and set properties for Name, DateTime, Priority, and Info.
     /// </summary>
-    public class Task : IComparable<Task>
+    public class Task : IEquatable<Task>, IComparable<Task>
     {
         public string Name { get; set; }
         public DateTime dt { get; set; }
@@ -35,14 +36,27 @@ namespace ToDoApplication
         {
             return String.Format("Name: {0}\nDate: {1}\nInfo: {2}\n", this.Name, this.dt.Date.ToShortDateString(), this.info);
         }
-        /// <summary>
-        /// Comparing each enum to each other to sort it in our listbox on the Homepage.
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public int CompareTo(Task other)
+
+        public int CompareTo(Task y)
         {
-            return this.p.CompareTo(other.p);
+            //Date Time
+            if (this.dt.CompareTo(y.dt) != 0)
+                return this.dt.CompareTo(y.dt);
+            //Priority
+            if (this.p > y.p)
+                return 1;
+            if (this.p < y.p)
+                return -1;
+            //Name
+            if (this.Name.CompareTo(y.Name) != 0)
+                return this.Name.CompareTo(y.Name);
+            //Info
+            return (this.info.CompareTo(y.info));
+        }
+
+        public bool Equals(Task other)
+        {
+            return this.Name == other.Name && this.p == other.p && this.dt == other.dt && this.info == other.info;
         }
     }
 }

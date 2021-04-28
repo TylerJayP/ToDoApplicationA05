@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -13,9 +14,9 @@ namespace ToDoApplication
     /// </summary>
     public partial class Homepage : Form
     {
-        public static IList<Task> previousTasks { get; set; }
-        public static IList<Task> currentTasks { get; set; }
-        public static IList<Task> upcomingTasks { get; set; }
+        public static List<Task> previousTasks { get; set; }
+        public static List<Task> currentTasks { get; set; }
+        public static List<Task> upcomingTasks { get; set; }
 
         /// <summary>
         /// Constructs new instance of homepage
@@ -78,27 +79,12 @@ namespace ToDoApplication
                     }
                     else if (listBox4.SelectedItem != null && currentTasks.Any())
                     {
-                        string selectedItem = listBox4.SelectedItem.ToString();
                         int selectedIndex = listBox4.SelectedIndex;
-                        var cTask =
-                            from c in currentTasks
-                            where c.Name == selectedItem
-                            select c;
-                        foreach (Task tk in cTask)
-                        {
-                            if (currentTasks.Any())
-                            {
-                                previousTasks.Add(tk);
-                                currentTasks.Remove(tk);
-                            }
-                            break;
-                        }
-                        StringBuilder s = new StringBuilder();
-                        foreach (Task t in currentTasks)
-                        {
-                            s.Append(t.ToString() + "\n");
-                        }
-                        InfoBox.Text = s.ToString();
+                        previousTasks.Add(currentTasks[selectedIndex]);
+                        currentTasks.RemoveAt(selectedIndex);
+                        listBox4.Items.RemoveAt(selectedIndex);
+
+                        InfoBox.Text = "Great Job!";
                     }
                     else
                     {
@@ -116,28 +102,12 @@ namespace ToDoApplication
                     }
                     else if (listBox4.SelectedItem != null && upcomingTasks.Any())
                     {
-                        string selectedItem = listBox4.SelectedItem.ToString();
                         int selectedIndex = listBox4.SelectedIndex;
-                        var uTask =
-                            from u in upcomingTasks
-                            where u.Name == selectedItem.Substring(0, u.Name.Length)
-                            select u;
-                        foreach (Task tk in uTask)
-                        {
+                        previousTasks.Add(upcomingTasks[selectedIndex]);
+                        upcomingTasks.RemoveAt(selectedIndex);
+                        listBox4.Items.RemoveAt(selectedIndex);
 
-                            if (upcomingTasks.Any())
-                            {
-                                previousTasks.Add(tk);
-                                upcomingTasks.Remove(tk);
-                            }
-                            break;
-                        }
-                        StringBuilder s = new StringBuilder();
-                        foreach (Task t in upcomingTasks)
-                        {
-                            s.Append(t.ToString() + "\n");
-                        }
-                        InfoBox.Text = s.ToString();
+                        InfoBox.Text = "Great Job!";
                     }
                     else
                     {
@@ -168,21 +138,27 @@ namespace ToDoApplication
         public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = comboBox1.SelectedIndex;
-            Object selectedItem = comboBox1.SelectedItem;
+
+            //Clear box
+            InfoBox.Clear();
+            listBox4.Items.Clear();
 
             //Current Tasks
             if (selectedIndex == 0)
             {
                 //Allow complete task button
                 CompleteTask.Enabled = true;
-                listBox4.Items.Clear();
-                currentTasks.OrderBy(xx => xx.dt).ThenBy(x => x.p).ToList();
-                List<string> names = new List();
-                foreach(Task t in currentTasks)
+
+                //Sort current tasks
+                currentTasks.Sort();
+
+                //Print current tasks to box
+                List<string> cnames = new List();
+                foreach (Task t in currentTasks)
                 {
-                    names.Add(t.Name);
+                    cnames.Add(t.Name);
                 }
-                listBox4.Items.AddRange(names.ToArray());
+                listBox4.Items.AddRange(cnames.ToArray());
             }
 
             //Previous Tasks
@@ -191,14 +167,16 @@ namespace ToDoApplication
                 //Disallow complete task button
                 CompleteTask.Enabled = false;
 
-                listBox4.Items.Clear();
-                previousTasks.OrderBy(y => y.p).ToList();
-                List<string> names = new List();
+                //Sort tasks
+                previousTasks.Sort();
+
+                //Print items to box
+                List<string> pnames = new List();
                 foreach (Task t in previousTasks)
                 {
-                    names.Add(t.Name);
+                    pnames.Add(t.Name);
                 }
-                listBox4.Items.AddRange(names.ToArray());
+                listBox4.Items.AddRange(pnames.ToArray());
 
             }
 
@@ -208,14 +186,16 @@ namespace ToDoApplication
                 //Allow complete task button
                 CompleteTask.Enabled = true;
 
-                listBox4.Items.Clear();
-                upcomingTasks.OrderBy(zz => zz.dt).ThenBy(z => z.p).ToList();
-                List<string> names = new List();
+                //Sort upcoming tasks
+                upcomingTasks.Sort();
+
+                //Print tasks to info box
+                List<string> unames = new List();
                 foreach (Task t in upcomingTasks)
                 {
-                    names.Add(t.Name + " : " + t.dt.ToShortDateString());
+                    unames.Add(t.Name + " : " + t.dt.ToShortDateString());
                 }
-                listBox4.Items.AddRange(names.ToArray());
+                listBox4.Items.AddRange(unames.ToArray());
             }
         }
 
@@ -270,75 +250,27 @@ namespace ToDoApplication
         /// <param name="e"></param>
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch(comboBox1.SelectedIndex)
+            InfoBox.Clear();
+            int selectedIndex = listBox4.SelectedIndex;
+            if (listBox4.Items.Count != 0)
             {
-                //Current
-                case 0:
-                    if (listBox4.SelectedItem == null)
-                    {
-                        InfoBox.Text = "Removed!";
-                    }
-                    else
-                    {                       
-                        string selectedItem = listBox4.SelectedItem.ToString();
-                        var cTask =
-                            from c in currentTasks
-                            where c.Name == selectedItem                         
-                            select c;
-                        StringBuilder s = new StringBuilder();
-                        foreach (Task t in cTask)
-                        {
-                            s.Append(t.ToString() + "\n");
-                        }
-                        InfoBox.Text = s.ToString();
-                    }
-                    break;
-                //Previous
-                case 1:
-                    if (listBox4.SelectedItem == null)
-                    {
-                        InfoBox.Text = "Removed!";
-                    }
-                    else
-                    {
-                        string selectedItem = listBox4.SelectedItem.ToString();
-                        var pTask =
-                            from p in previousTasks
-                            where p.Name == selectedItem
-                            select p;
-                        StringBuilder s = new StringBuilder();
-                        foreach (Task t in pTask)
-                        {
-                            s.Append(t.ToString() + "\n");
-                        }
-                        InfoBox.Text = s.ToString();
-                    }
-                    break;
-                //Upcoming
-                case 2:
-                    if (listBox4.SelectedItem == null)
-                    {
-                        InfoBox.Text = "Removed!";
-                    }
-                    else
-                    {
-                        string selectedItem = listBox4.SelectedItem.ToString().Split(" : ")[0];
-                        string selectedDate = listBox4.SelectedItem.ToString().Split(" : ")[1];
-
-                        var uTask =
-                        from u in upcomingTasks
-                        where selectedItem == u.Name && selectedDate == u.dt.ToShortDateString()
-                        select u;
-                        StringBuilder s = new StringBuilder();
-                        foreach (Task u in uTask)
-                        {
-                            s.Append(u.ToString() + "\n");
-                        }
-                        InfoBox.Text = s.ToString();
-   
-                    }
-                    break;
+                switch (comboBox1.SelectedIndex)
+                {
+                    //Current
+                    case 0:
+                        InfoBox.Text = currentTasks[selectedIndex].ToString();
+                        break;
+                    //Previous
+                    case 1:
+                        InfoBox.Text = previousTasks[selectedIndex].ToString();
+                        break;
+                    //Upcoming
+                    case 2:
+                        InfoBox.Text = upcomingTasks[selectedIndex].ToString();
+                        break;
+                }
             }
+            
         }
 
         /// <summary>
@@ -502,6 +434,10 @@ namespace ToDoApplication
                 Console.WriteLine("StreamReader is not functioning correctly");
             }
             
+        }
+        public void errorMessage(string s)
+        {
+            this.InfoBox.Text = s;
         }
     }
 }

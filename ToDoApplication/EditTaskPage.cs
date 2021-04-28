@@ -27,7 +27,7 @@ namespace ToDoApplication
             // comboIndex determines which task list is selected
             // lbIndex determines which task of the list is selected
             // Had to make the task lists public static in order to get the data from different forms for easier data processing
-            if (cbIndex == 0 && Homepage.currentTasks.Any())
+            if (cbIndex == 0 && Homepage.currentTasks.Count != 0)
             {
                 EditNameBox.Text = Homepage.currentTasks[lbIndex].Name;
                 EditInfoBox.Text = Homepage.currentTasks[lbIndex].info;
@@ -44,7 +44,7 @@ namespace ToDoApplication
                 else
                     highPriority.Checked = true;
             }
-            if (cbIndex == 1 && Homepage.previousTasks.Any())
+            if (cbIndex == 1 && Homepage.previousTasks.Count != 0)
             {
                 EditNameBox.Text = Homepage.previousTasks[lbIndex].Name;
                 EditInfoBox.Text = Homepage.previousTasks[lbIndex].info;
@@ -61,7 +61,7 @@ namespace ToDoApplication
                 else
                     highPriority.Checked = true;
             }
-            if (cbIndex == 2 && Homepage.upcomingTasks.Any())
+            if (cbIndex == 2 && Homepage.upcomingTasks.Count != 0)
             {
                 EditNameBox.Text = Homepage.upcomingTasks[lbIndex].Name;
                 EditInfoBox.Text = Homepage.upcomingTasks[lbIndex].info;
@@ -99,87 +99,75 @@ namespace ToDoApplication
             {               
                 Homepage.currentTasks[lbIndex].Name = EditNameBox.Text;
                 Homepage.currentTasks[lbIndex].info = EditInfoBox.Text;
-                Homepage.currentTasks[lbIndex].dt = EditDateBox.Value;
-
                 if (lowPriority.Checked == true)
                 {
                     Homepage.currentTasks[lbIndex].p = Priority.LOW;
-                    this.Close();
                 }
 
                 else if (mediumPriority.Checked == true)
                 {
                     Homepage.currentTasks[lbIndex].p = Priority.MEDIUM;
-                    this.Close();
                 }
                 else
                 {
                     Homepage.currentTasks[lbIndex].p = Priority.HIGH;
-                    this.Close();
                 }
+                switch (EditDateBox.Value.CompareTo(Homepage.currentTasks[lbIndex].dt))
+                {
+                    case 1:
+                        Homepage.upcomingTasks.Add(new Task(EditNameBox.Text, EditDateBox.Value, Homepage.currentTasks[lbIndex].p, EditInfoBox.Text));
+                        Homepage.currentTasks.RemoveAt(lbIndex);
+                        break;
+                    case -1:
+                        Program.home.errorMessage("Date was not changed, as it was before the current date. Sorry, beautiful.");
+                        break;
+                    default:
+                        Homepage.currentTasks[lbIndex].dt = EditDateBox.Value;
+                        break;
+                }
+                this.Close();
             }
 
+            //Previous Task
             if (cbIndex == 1)
             {
-                Homepage.previousTasks[lbIndex].Name = EditNameBox.Text;
-                Homepage.previousTasks[lbIndex].info = EditInfoBox.Text;
-                Homepage.previousTasks[lbIndex].dt = EditDateBox.Value;
-
-                if (lowPriority.Checked == true)
-                {
-                    Homepage.previousTasks[lbIndex].p = Priority.LOW;
-                    this.Close();
-                }
-                else if (mediumPriority.Checked == true)
-                {
-                    Homepage.previousTasks[lbIndex].p = Priority.MEDIUM;
-                    this.Close();
-                }
-                else
-                {
-                    Homepage.previousTasks[lbIndex].p = Priority.HIGH;
-                    this.Close();
-                }
+                Program.home.errorMessage("Can not edit previous task information");
+                this.Close();
             }
 
+            //Upcoming Task
             if (cbIndex == 2)
             {
                 Homepage.upcomingTasks[lbIndex].Name = EditNameBox.Text;
                 Homepage.upcomingTasks[lbIndex].info = EditInfoBox.Text;
-                Homepage.upcomingTasks[lbIndex].dt = EditDateBox.Value;
                 if (lowPriority.Checked == true)
                 {
                     Homepage.upcomingTasks[lbIndex].p = Priority.LOW;
-                    this.Close();
                 }
                 else if (mediumPriority.Checked == true)
                 {
                     Homepage.upcomingTasks[lbIndex].p = Priority.MEDIUM;
-                    this.Close();
                 }
                 else
                 {
                     Homepage.upcomingTasks[lbIndex].p = Priority.HIGH;
-                    this.Close();
                 }
-            }
-            if (lowPriority.Checked == true)
-                p = Priority.LOW;
-            else if (mediumPriority.Checked == true)
-                p = Priority.MEDIUM;
-            else
-                p = Priority.HIGH;
-            // Adds and delete tasks if edited date is changed
-            if (dt.Date > DateTime.Today && Homepage.currentTasks.Any())
-            { 
-                Homepage.currentTasks.RemoveAt(lbIndex);
-                Program.home.AddUpcomingTask(new Task(name, dt, p, info));
-                this.Close();
-            }
-            else if(dt.Date == DateTime.Today && Homepage.upcomingTasks.Any())
-            {
-                Homepage.upcomingTasks.RemoveAt(lbIndex);
-                Program.home.AddCurrentTask(new Task(name, dt, p, info));
+                switch (EditDateBox.Value.CompareTo(Homepage.currentTasks[lbIndex].dt))
+                {
+                    case 1:
+                        Homepage.upcomingTasks[lbIndex].dt = EditDateBox.Value;
+                        break;
+                    case -1:
+                        if (EditDateBox.Value < DateTime.Today)
+                            Program.home.errorMessage("Date was not changed, as it was before the current date. Sorry, beautiful.");
+                        else
+                            Homepage.upcomingTasks[lbIndex].dt = EditDateBox.Value;
+                        break;
+                    default:
+                        Homepage.currentTasks.Add(new Task(EditNameBox.Text, EditDateBox.Value, Homepage.currentTasks[lbIndex].p, EditInfoBox.Text));
+                        Homepage.upcomingTasks.RemoveAt(lbIndex);
+                        break;
+                }
                 this.Close();
             }
         }
