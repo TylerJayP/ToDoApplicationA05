@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace ToDoApplication
 {
-    /// <summary>
-    /// Class with get and set properties for Name, DateTime, Priority, and Info.
-    /// </summary>
+  
     public class Task : IEquatable<Task>, IComparable<Task>
     {
         public string Name { get; set; }
@@ -14,7 +11,7 @@ namespace ToDoApplication
         public string info { get; set; }
 
         /// <summary>
-        /// Constructor for Name, DateTime, Priority, Info.
+        /// Constructor that intakes information for Name, DateTime, Priority, Info.
         /// </summary>
         /// <param name="Name"></param>
         /// <param name="dt"></param>
@@ -29,7 +26,10 @@ namespace ToDoApplication
         }
 
         /// <summary>
-        /// Creating a ToString method on how we want to print out our Task stuff.
+        /// Prints current task in the following format
+        /// Name: {Task name}
+        /// Date: {Task date}
+        /// Info: {Task info}
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -37,6 +37,12 @@ namespace ToDoApplication
             return String.Format("Name: {0}\nDate: {1}\nInfo: {2}\n", this.Name, this.dt.Date.ToShortDateString(), this.info);
         }
 
+        /// <summary>
+        /// Implementation of CompareTo to allow sorting of collections of Task objects.
+        /// Sorts first by DateTime, then Priority, then Name, then Info.
+        /// </summary>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public int CompareTo(Task y)
         {
             //Date Time
@@ -54,6 +60,11 @@ namespace ToDoApplication
             return (this.info.CompareTo(y.info));
         }
 
+        /// <summary>
+        /// Implementation of Equals method to determine whether two tasks are identical or not.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(Task other)
         {
             return this.Name == other.Name && this.p == other.p && this.dt == other.dt && this.info == other.info;

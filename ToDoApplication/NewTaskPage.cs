@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ToDoApplication
 {
     /// <summary>
-    /// Creates a New Task Form that the user will be able to create new tasks
+    /// Creates a New Task Form that allows for creation of new Task object and populates its
+    /// respective list in Homepage.
     /// </summary>
     public partial class NewTaskPage : Form
     {
@@ -22,8 +16,7 @@ namespace ToDoApplication
         }
 
         /// <summary>
-        /// When "Add Task" is clicked, whatever the user has input and selected will be sent over to the listboxes that represent which
-        /// date the user has input.
+        /// Event handler that populates text from new task page form into Task object and respective Task list.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -58,8 +51,9 @@ namespace ToDoApplication
                 addNewTask.Enabled = false;
             }
         }
+
         /// <summary>
-        /// Creates a groubox that controls that only one radiobutton can be selected at a time.
+        /// Creates a grouping of radiobuttons, allowing for only one to be pressed at a time.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -71,6 +65,12 @@ namespace ToDoApplication
             Controls.Add(groupBox1);
         }
 
+        /// <summary>
+        /// Allows and disallows functionality of create new task button dependent upon whether
+        /// date is current, upcoming, or previous.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             if (dateTimePicker1.Value >= DateTime.Today)

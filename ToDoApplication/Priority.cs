@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToDoApplication
+﻿namespace ToDoApplication
 {
     /// <summary>
-    /// Creating an enum that allows the user to select the priority of their task
-    /// This will be ordered using the Task class.
+    /// Creates enum that allows the user to select the priority of their task with a descending natural order
     /// </summary>
     public enum Priority
     {

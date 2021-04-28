@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace ToDoApplication
 {
     /// <summary>
-    /// Editing Task Form Start
+    /// Creates GUI page for user to edit a selected task
     /// </summary>
     public partial class EditTaskPage : Form
     {
         public int cbIndex;
         public int lbIndex;
+
         /// <summary>
-        /// Passing in the index of ComboBox and ListBox to set later for editing tasks based on those indexes.
+        /// Passes in the index of ComboBox and ListBox to set later for editing tasks based on those indexes.
         /// </summary>
         /// <param name="comboBoxIndex"></param>
         /// <param name="listBoxIndex"></param>
@@ -24,9 +23,6 @@ namespace ToDoApplication
             cbIndex = comboBoxIndex;
             lbIndex = listBoxIndex;
 
-            // comboIndex determines which task list is selected
-            // lbIndex determines which task of the list is selected
-            // Had to make the task lists public static in order to get the data from different forms for easier data processing
             if (cbIndex == 0 && Homepage.currentTasks.Count != 0)
             {
                 EditNameBox.Text = Homepage.currentTasks[lbIndex].Name;
@@ -80,10 +76,8 @@ namespace ToDoApplication
             }
         }
 
-
-
         /// <summary>
-        /// Allowing user to update task that is currently selected in Homepage and getting the index on which combobox and listbox is being used.
+        /// Allows user to update task that is currently selected in Homepage, and gets the index on which drop down text box and listbox is being used.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -92,9 +86,7 @@ namespace ToDoApplication
             DateTime dt = EditDateBox.Value;
             string name = EditNameBox.Text;
             string info = EditInfoBox.Text;
-            Priority p;
 
-            //Pretty much the reverse of logic above in the EditTaskPage method
             if (cbIndex == 0)
             {               
                 Homepage.currentTasks[lbIndex].Name = EditNameBox.Text;
@@ -119,7 +111,7 @@ namespace ToDoApplication
                         Homepage.currentTasks.RemoveAt(lbIndex);
                         break;
                     case -1:
-                        Program.home.errorMessage("Date was not changed, as it was before the current date. Sorry, beautiful.");
+                        Program.home.ErrorMessage("Date was not changed, as it was before the current date. Sorry, beautiful.");
                         break;
                     default:
                         Homepage.currentTasks[lbIndex].dt = EditDateBox.Value;
@@ -131,7 +123,7 @@ namespace ToDoApplication
             //Previous Task
             if (cbIndex == 1)
             {
-                Program.home.errorMessage("Can not edit previous task information");
+                Program.home.ErrorMessage("Can not edit previous task information");
                 this.Close();
             }
 
@@ -159,7 +151,7 @@ namespace ToDoApplication
                         break;
                     case -1:
                         if (EditDateBox.Value < DateTime.Today)
-                            Program.home.errorMessage("Date was not changed, as it was before the current date. Sorry, beautiful.");
+                            Program.home.ErrorMessage("Date was not changed, as it was before the current date. Sorry, beautiful.");
                         else
                             Homepage.upcomingTasks[lbIndex].dt = EditDateBox.Value;
                         break;
