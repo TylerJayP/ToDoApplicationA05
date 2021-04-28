@@ -206,8 +206,11 @@ namespace ToDoApplication
         /// <param name="e"></param>
         public void button3_Click(object sender, EventArgs e)
         {
-            var updateTaskForm = new EditTaskPage(comboBox1.SelectedIndex, listBox4.SelectedIndex);
-            updateTaskForm.Show();
+            if (listBox4.SelectedIndex != -1)
+            {
+                var updateTaskForm = new EditTaskPage(comboBox1.SelectedIndex, listBox4.SelectedIndex);
+                updateTaskForm.Show();
+            }
         }
 
         /// <summary>
@@ -252,7 +255,7 @@ namespace ToDoApplication
         {
             InfoBox.Clear();
             int selectedIndex = listBox4.SelectedIndex;
-            if (listBox4.Items.Count != 0)
+            if (selectedIndex != -1)
             {
                 switch (comboBox1.SelectedIndex)
                 {
